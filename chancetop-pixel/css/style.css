@@ -33,7 +33,7 @@
   --text-h1:     32px;
   --text-h2:     24px;
   --text-h3:     18px;
-  --text-nav:    12px;
+  --text-nav:    14px;
   --text-body:   16px;
   --text-small:  14px;
   --text-meta:   11px;
@@ -136,6 +136,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 
 /* ----- Navigation ----- */
+#nav-container {
+  min-height: var(--nav-height);
+}
+
 .nav-bar {
   position: fixed;
   top: 0;
@@ -210,6 +214,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border: none;
   cursor: pointer;
   padding: var(--space-xs);
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-toggle span {

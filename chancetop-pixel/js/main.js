@@ -6,7 +6,6 @@
 (function() {
   'use strict';
 
-  const SITE_URL = '/chancetop-pixel/';
   const PAGES = {
     'index':   { title: '首页', path: 'index.html' },
     'about':   { title: '关于我们', path: 'about.html' },
