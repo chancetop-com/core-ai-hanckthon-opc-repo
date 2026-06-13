@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>团队协作看板 - MVP Demo</title>
+<style>
+  /* === Reset & Base === */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* === Header === */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .header h1 span { color: #e94560; }
+  .header .subtitle {
+    font-size: 13px;
+    opacity: 0.7;
+    font-weight: 400;
+    margin-left: 12px;
+  }
+  .header .badge {
+    background: #e94560;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* === Team === */
+  .team-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    flex-wrap: wrap;
+  }
+  .team-bar .label {
+    font-size: 13px;
+    color: #888;
+    margin-right: 4px;
+  }
+  .member-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    cursor: default;
+    border: 2px solid transparent;
+    transition: transform 0.15s;
+  }
+  .member-avatar:hover { transform: scale(1.15); }
+
+  /* === Add Task Form === */
+  .add-task-bar {
+    display: flex;
+    gap: 10px;
+    padding: 16px 32px;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .add-task-bar input,
+  .add-task-bar select {
+    padding: 8px 14px;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .add-task-bar input:focus,
+  .add-task-bar select:focus { border-color: #1a1a2e; }
+  .add-task-bar input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+  }
+  .add-task-bar button {
+    padding: 8px 24px;
+    background: #1a1a2e;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .add-task-bar button:hover { background: #16213e; }
+  .add-task-bar button:active { transform: scale(0.97); }
+
+  /* === Board === */
+  .board {
+    display: flex;
+    gap: 16px;
+    padding: 24px 32px;
+    overflow-x: auto;
+    min-height: calc(100vh - 200px);
+    align-items: flex-start;
+  }
+  .column {
+    flex: 1;
+    min-width: 260px;
+    background: #e8ecf1;
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  .column-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .column-header .count {
+    background: rgba(0,0,0,0.08);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+  }
+  .column.todo .column-header h2 { color: #555; }
+  .column.in-progress .column-header h2 { color: #e67e22; }
+  .column.done .column-header h2 { color: #27ae60; }
+
+  /* === Cards === */
+  .card-list {
+    min-height: 60px;
+    transition: background 0.2s;
+    border-radius: 8px;
+    padding: 4px 0;
+  }
+  .card-list.drag-over {
+    background: rgba(26, 26, 46, 0.05);
+    outline: 2px dashed #1a1a2e;
+    outline-offset: -2px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    cursor: grab;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    border-left: 3px solid transparent;
+  }
+  .card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  }
+  .card:active { cursor: grabbing; }
+  .card.dragging {
+    opacity: 0.5;
+    transform: rotate(2deg);
+  }
+  .card .task-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    word-break: break-word;
+  }
+  .card .task-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .card .assignee {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card .assignee .mini-avatar {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .card .assignee .name { color: #666; }
+  .card .delete-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 2px;
+    transition: color 0.15s;
+  }
+  .card .delete-btn:hover { color: #e74c3c; }
+
+  /* === Empty State === */
+  .empty-state {
+    text-align: center;
+    color: #aaa;
+    font-size: 13px;
+    padding: 24px 8px;
+  }
+
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 12px;
+    color: #999;
+    background: #fff;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  /* === Responsive === */
+  @media (max-width: 900px) {
+    .board { flex-direction: column; }
+    .column { min-width: unset; }
+    .header { flex-direction: column; gap: 8px; text-align: center; }
+    .header .subtitle { margin-left: 0; }
+  }
+
+  /* === Toast === */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1a1a2e;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <h1>Team<span>Flow</span> <span class="subtitle">团队协作看板 · MVP Demo</span></h1>
+  </div>
+  <div class="badge">3-Day Sprint</div>
+</div>
+
+<!-- Team Bar -->
+<div class="team-bar">
+  <span class="label">团队成员</span>
+  <div id="memberList"></div>
+</div>
+
+<!-- Add Task Form -->
+<div class="add-task-bar">
+  <input type="text" id="taskInput" placeholder="输入任务标题…" maxlength="100">
+  <select id="assigneeSelect"></select>
+  <select id="statusSelect">
+    <option value="todo">To Do</option>
+    <option value="in-progress">In Progress</option>
+    <option value="done">Done</option>
+  </select>
+  <button id="addTaskBtn">+ 添加任务</button>
+</div>
+
+<!-- Board -->
+<div class="board" id="board">
+  <div class="column todo" data-status="todo">
+    <div class="column-header">
+      <h2>📋 To Do</h2>
+      <span class="count" id="count-todo">0</span>
+    </div>
+    <div class="card-list" id="list-todo"></div>
+  </div>
+  <div class="column in-progress" data-status="in-progress">
+    <div class="column-header">
+      <h2>⚡ In Progress</h2>
+      <span class="count" id="count-in-progress">0</span>
+    </div>
+    <div class="card-list" id="list-in-progress"></div>
+  </div>
+  <div class="column done" data-status="done">
+    <div class="column-header">
+      <h2>✅ Done</h2>
+      <span class="count" id="count-done">0</span>
+    </div>
+    <div class="card-list" id="list-done"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  TeamFlow MVP Demo · 纯前端 · 数据存在浏览器本地 · 可拖拽排序
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  // === Data ===
+  const COLORS = ['#e94560','#0f3460','#16a085','#e67e22','#9b59b6','#2c3e50','#d35400','#2980b9'];
+
+  const DEFAULT_MEMBERS = [
+    { id: 'm1', name: '张明', color: '#e94560' },
+    { id: 'm2', name: '李婷', color: '#0f3460' },
+    { id: 'm3', name: '王磊', color: '#16a085' },
+    { id: 'm4', name: '陈悦', color: '#e67e22' },
+  ];
+
+  const DEFAULT_TASKS = [
+    { id: 't1', title: '设计登录页面UI', assignee: 'm1', status: 'done' },
+    { id: 't2', title: '搭建项目脚手架', assignee: 'm3', status: 'done' },
+    { id: 't3', title: '实现用户认证API', assignee: 'm3', status: 'in-progress' },
+    { id: 't4', title: '编写测试用例', assignee: 'm2', status: 'in-progress' },
+    { id: 't5', title: '部署CI/CD流水线', assignee: 'm1', status: 'todo' },
+    { id: 't6', title: '编写项目文档', assignee: 'm4', status: 'todo' },
+    { id: 't7', title: '性能优化与缓存策略', assignee: null, status: 'todo' },
+  ];
+
+  // === State ===
+  let members = [];
+  let tasks = [];
+  let nextTaskId = 1;
+  let dragSrcId = null;
+
+  // === DOM refs ===
+  const $ = id => document.getElementById(id);
+  const taskInput = $('taskInput');
+  const assigneeSelect = $('assigneeSelect');
+  const statusSelect = $('statusSelect');
+  const addBtn = $('addTaskBtn');
+  const memberList = $('memberList');
+  const lists = {
+    todo: $('list-todo'),
+    'in-progress': $('list-in-progress'),
+    done: $('list-done'),
+  };
+  const counts = {
+    todo: $('count-todo'),
+    'in-progress': $('count-in-progress'),
+    done: $('count-done'),
+  };
+  const toastEl = $('toast');
+  let toastTimer = null;
+
+  // === Helpers ===
+  function getMember(id) { return members.find(m => m.id === id); }
+
+  function getInitials(name) {
+    return name.slice(0, 2);
+  }
+
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2000);
+  }
+
+  // === Render ===
+  function renderMembers() {
+    memberList.innerHTML = members.map(m =>
+      `<div class="member-avatar" style="background:${m.color}" title="${m.name}">${getInitials(m.name)}</div>`
+    ).join('');
+  }
+
+  function renderAssigneeSelect() {
+    assigneeSelect.innerHTML =
+      '<option value="">不分配</option>' +
+      members.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
+  }
+
+  function renderBoard() {
+    for (const status of ['todo', 'in-progress', 'done']) {
+      const list = lists[status];
+      const filtered = tasks.filter(t => t.status === status);
+      list.innerHTML = filtered.map(t => {
+        const assignee = t.assignee ? getMember(t.assignee) : null;
+        return `
+          <div class="card" draggable="true" data-id="${t.id}">
+            <div class="task-title">${escapeHtml(t.title)}</div>
+            <div class="task-meta">
+              <span class="assignee">
+                ${assignee
+                  ? `<span class="mini-avatar" style="background:${assignee.color}">${getInitials(assignee.name)}</span>
+                     <span class="name">${escapeHtml(assignee.name)}</span>`
+                  : '<span class="name" style="color:#aaa">未分配</span>'}
+              </span>
+              <button class="delete-btn" data-id="${t.id}" title="删除任务">✕</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (filtered.length === 0) {
+        list.innerHTML = `<div class="empty-state">拖拽任务到这里</div>`;
+      }
+
+      // Update count
+      counts[status].textContent = filtered.length;
+    }
+
+    // Attach drag & delete events after render
+    attachCardEvents();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // === Card Events (drag + delete) ===
+  function attachCardEvents() {
+    document.querySelectorAll('.card').forEach(card => {
+      // Drag start
+      card.addEventListener('dragstart', e => {
+        dragSrcId = card.dataset.id;
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', card.dataset.id);
+      });
+      card.addEventListener('dragend', e => {
+        card.classList.remove('dragging');
+        document.querySelectorAll('.card-list').forEach(cl => cl.classList.remove('drag-over'));
+      });
+
+      // Delete
+      card.querySelector('.delete-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        const id = e.target.dataset.id;
+        const task = tasks.find(t => t.id === id);
+        tasks = tasks.filter(t => t.id !== id);
+        renderBoard();
+        showToast(`已删除: "${task?.title || ''}"`);
+      });
+    });
+
+    // List drop zones
+    document.querySelectorAll('.card-list').forEach(list => {
+      list.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        list.classList.add('drag-over');
+      });
+      list.addEventListener('dragleave', e => {
+        list.classList.remove('drag-over');
+      });
+      list.addEventListener('drop', e => {
+        e.preventDefault();
+        list.classList.remove('drag-over');
+        const id = e.dataTransfer.getData('text/plain');
+        if (!id) return;
+
+        const task = tasks.find(t => t.id === id);
+        if (!task) return;
+
+        const newStatus = list.closest('.column').dataset.status;
+        if (task.status === newStatus) return;
+
+        const oldStatus = task.status;
+        task.status = newStatus;
+        renderBoard();
+        showToast(`"${task.title}" 从 ${statusLabel(oldStatus)} → ${statusLabel(newStatus)}`);
+      });
+    });
+  }
+
+  function statusLabel(s) {
+    return { 'todo': 'To Do', 'in-progress': 'In Progress', 'done': 'Done' }[s] || s;
+  }
+
+  // === Add Task ===
+  function addTask() {
+    const title = taskInput.value.trim();
+    if (!title) {
+      showToast('请输入任务标题');
+      taskInput.focus();
+      return;
+    }
+    const assignee = assigneeSelect.value || null;
+    const status = statusSelect.value;
+
+    const newTask = {
+      id: 't' + (nextTaskId++),
+      title: title,
+      assignee: assignee,
+      status: status,
+    };
+    tasks.push(newTask);
+    renderBoard();
+    taskInput.value = '';
+    taskInput.focus();
+    showToast(`已添加: "${title}"`);
+  }
+
+  // === Init ===
+  function init() {
+    // Load from localStorage if exists
+    try {
+      const saved = localStorage.getItem('teamflow_data');
+      if (saved) {
+        const data = JSON.parse(saved);
+        members = data.members || DEFAULT_MEMBERS;
+        tasks = data.tasks || DEFAULT_TASKS;
+        nextTaskId = data.nextTaskId || (DEFAULT_TASKS.length + 1);
+      } else {
+        members = DEFAULT_MEMBERS;
+        tasks = DEFAULT_TASKS;
+        nextTaskId = DEFAULT_TASKS.length + 1;
+      }
+    } catch(e) {
+      members = DEFAULT_MEMBERS;
+      tasks = DEFAULT_TASKS;
+      nextTaskId = DEFAULT_TASKS.length + 1;
+    }
+
+    renderMembers();
+    renderAssigneeSelect();
+    renderBoard();
+
+    // Event: add task
+    addBtn.addEventListener('click', addTask);
+    taskInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') addTask();
+    });
+
+    // Auto-save on changes
+    function autoSave() {
+      try {
+        localStorage.setItem('teamflow_data', JSON.stringify({
+          members, tasks, nextTaskId
+        }));
+      } catch(e) { /* quota exceeded, ignore */ }
+    }
+
+    // Save after render
+    const origRender = renderBoard;
+    renderBoard = function() {
+      origRender.apply(this, arguments);
+      autoSave();
+    };
+
+    // Save after add
+    document.querySelectorAll('.card-list').forEach(list => {
+      list.addEventListener('drop', autoSave);
+    });
+
+    // Add a data version indicator
+    console.log('TeamFlow Demo loaded. Data persisted in localStorage.');
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+</body>
+</html>
