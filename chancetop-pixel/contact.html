@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系我们 — Chancetop</title>
+  <meta name="description" content="联系厦门畅拓科技（Chancetop）— 厦门软件园二期，邮箱 hr@chancetop.com。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="fade-in">联系我们</h1>
+      <p class="fade-in">开启合作的第一步</p>
+    </div>
+  </div>
+
+  <div class="pixel-divider"></div>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="contact-wrap">
+        <!-- Contact Info -->
+        <div class="fade-in">
+          <h2 style="margin-bottom:var(--space-lg);">联系方式</h2>
+          <p style="color:var(--color-text-dim);margin-bottom:var(--space-lg);">有项目需求或想了解更多？欢迎随时与我们取得联系。我们的团队将在 1-2 个工作日内回复。</p>
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <div class="icon pixel-border">✉</div>
+              <div>
+                <div class="label">邮箱</div>
+                <div class="value"><a href="mailto:hr@chancetop.com">hr@chancetop.com</a></div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="icon pixel-border">📍</div>
+              <div>
+                <div class="label">地址</div>
+                <div class="value">厦门软件园二期<br/>观日路 18 号 401 单元</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="icon pixel-border">🕐</div>
+              <div>
+                <div class="label">工作时间</div>
+                <div class="value">周一至周五 09:00 - 18:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="fade-in">
+          <div class="pixel-border" style="background:var(--color-surface);padding:var(--space-lg);">
+            <!-- Form View -->
+            <div id="formView">
+              <form id="contactForm" novalidate>
+                <div class="form-group">
+                  <label for="name">姓名 *</label>
+                  <input type="text" id="name" name="name" class="form-input" required placeholder="请输入姓名" />
+                  <div class="form-error"></div>
+                </div>
+                <div class="form-group">
+                  <label for="company">公司名称</label>
+                  <input type="text" id="company" name="company" class="form-input" placeholder="请输入公司名称" />
+                </div>
+                <div class="form-group">
+                  <label for="email">邮箱 *</label>
+                  <input type="email" id="email" name="email" class="form-input" required placeholder="请输入邮箱" />
+                  <div class="form-error"></div>
+                </div>
+                <div class="form-group">
+                  <label for="phone">电话</label>
+                  <input type="text" id="phone" name="phone" class="form-input" placeholder="请输入电话号码" />
+                </div>
+                <div class="form-group">
+                  <label for="message">需求描述 *</label>
+                  <textarea id="message" name="message" class="form-input" required placeholder="请描述您的需求或问题..."></textarea>
+                  <div class="form-error"></div>
+                </div>
+                <button type="submit" class="btn btn-lg" style="width:100%;justify-content:center;">提交留言</button>
+              </form>
+            </div>
+
+            <!-- Loading State -->
+            <div id="formLoading" class="form-loading">
+              <div class="pixel-spinner"></div>
+              <p>提交中...</p>
+            </div>
+
+            <!-- Success State -->
+            <div id="formSuccess" class="form-success">
+              <div class="icon">✓</div>
+              <h3>感谢您的留言！</h3>
+              <p>我们会在 1-2 个工作日内通过邮件与您联系。</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="formError" class="form-error-state">
+              <div class="icon">⚠</div>
+              <h3>提交失败</h3>
+              <p>请稍后重试，或直接发送邮件至 hr@chancetop.com</p>
+              <button id="formRetry" class="btn" style="margin-top:var(--space-md);">重新填写</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script defer src="js/main.js"></script>
+</body>
+</html>
