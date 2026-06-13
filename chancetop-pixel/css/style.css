@@ -172,6 +172,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   width: auto;
 }
 
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
 .nav-logo svg .logo-icon { fill: var(--color-primary); }
 .nav-logo svg .logo-text { fill: var(--color-text); }
 
@@ -337,22 +343,16 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   flex-wrap: wrap;
 }
 
-/* ----- Pixel Grid Background (for hero visual) ----- */
-.pixel-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 4px;
-  max-width: 400px;
+/* ----- Hero Visual (Designer's pixel illustration) ----- */
+.hero-visual {
+  max-width: 640px;
   margin: var(--space-lg) auto;
 }
 
-.pixel-cell {
-  aspect-ratio: 1;
-  background: var(--color-surface);
-}
-
-.pixel-cell.active {
-  background: var(--color-primary);
+.hero-svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ----- Sections ----- */
