@@ -7,7 +7,7 @@
 <meta name="description" content="Chancetop 2026 黑客松 — 以 AI 为主题，汇聚创新力量。2026.06.15 - 06.17">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 /* ==================== Reset & Variables ==================== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -28,6 +28,7 @@
   --radius:8px;
   --radius-lg:12px;
   --font-sans:'Inter','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+  --font-pixel:'Press Start 2P',monospace;
   --space-xs:8px;
   --space-sm:16px;
   --space-md:24px;
@@ -66,6 +67,53 @@ body{
   font-size:1rem;
   margin-bottom:48px;
 }
+
+/* ==================== Pixel Style Utilities ==================== */
+.pixel-font{font-family:var(--font-pixel);letter-spacing:.02em}
+.pixel-divider{
+  width:80px;height:4px;margin:0 auto var(--space-lg);
+  background:repeating-linear-gradient(90deg,var(--cyan) 0px,var(--cyan) 4px,transparent 4px,transparent 8px);
+}
+.pixel-block-row{
+  display:flex;justify-content:center;gap:5px;margin-bottom:12px;
+}
+.pixel-block-row .pixel-block{
+  width:5px;height:5px;background:var(--cyan);
+  box-shadow:0 0 0 0 transparent;
+}
+.pixel-block-row .pixel-block:nth-child(2){background:var(--violet)}
+.pixel-block-row .pixel-block:nth-child(3){background:var(--cyan)}
+.pixel-star{
+  position:absolute;width:3px;height:3px;background:var(--cyan);
+  box-shadow:0 0 4px var(--cyan),0 0 8px var(--cyan);
+  animation:pixel-twinkle 3s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes pixel-twinkle{
+  0%,100%{opacity:.3}
+  50%{opacity:1}
+}
+
+/* Pixel CTA button */
+.btn-pixel{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 36px;
+  font-size:1rem;font-weight:600;
+  font-family:var(--font-sans);
+  color:#fff;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  border:2px solid var(--cyan);
+  border-radius:0;
+  cursor:pointer;text-decoration:none;
+  position:relative;
+  transition:transform .2s;
+  box-shadow:
+    0 2px 8px rgba(0,212,255,.15),
+    inset 0 0 0 2px rgba(255,255,255,.1);
+}
+.btn-pixel:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,212,255,.3),inset 0 0 0 2px rgba(255,255,255,.2)}
+.btn-pixel:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,212,255,.2),inset 0 0 0 3px rgba(255,255,255,.15)}
+.btn-pixel-lg{padding:16px 40px;font-size:1.05rem}
 
 /* ==================== Nav ==================== */
 nav{
@@ -124,32 +172,42 @@ nav .container{
   content:'';position:absolute;inset:-50%;
   width:200%;height:200%;
   background-image:
-    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
-  background-size:60px 60px;
-  animation:grid-drift 30s linear infinite;
+    linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
+  background-size:40px 40px;
+  animation:grid-drift 20s linear infinite;
 }
 @keyframes grid-drift{
   0%{transform:translate(0,0)}
-  100%{transform:translate(-60px,-60px)}
+  100%{transform:translate(-40px,-40px)}
+}
+/* 8-bit twinkling stars */
+@keyframes star-drift{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+.hero-stars{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
 }
 .hero-content{position:relative;z-index:1;max-width:780px}
 .hero-badge{
   display:inline-block;
   padding:6px 18px;
-  border-radius:20px;
-  font-size:.8rem;font-weight:600;
+  border-radius:0;
+  font-family:var(--font-pixel);
+  font-size:.65rem;font-weight:400;
   color:var(--cyan);
-  border:1px solid rgba(0,212,255,.25);
+  border:2px solid rgba(0,212,255,.3);
   background:rgba(0,212,255,.06);
-  margin-bottom:24px;
-  letter-spacing:.06em;
+  margin-bottom:20px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
 }
 .hero h1{
   font-size:clamp(2.4rem,6vw,4.2rem);
   font-weight:800;
   line-height:1.15;
-  margin-bottom:16px;
+  margin-bottom:12px;
 }
 .hero h1 .highlight{
   background:linear-gradient(135deg,var(--cyan),var(--violet));
@@ -157,10 +215,19 @@ nav .container{
   -webkit-text-fill-color:transparent;
   background-clip:text;
 }
+.hero-pixel-subtitle{
+  font-family:var(--font-pixel);
+  font-size:clamp(.7rem,1.5vw,1rem);
+  color:var(--cyan);
+  margin-bottom:8px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.8;
+}
 .hero-tagline{
   font-size:clamp(1.1rem,2vw,1.4rem);
   color:var(--text-secondary);
-  margin-bottom:12px;
+  margin-bottom:8px;
   font-weight:500;
 }
 .hero-date{
@@ -173,18 +240,21 @@ nav .container{
 .hero-cta{
   display:inline-flex;align-items:center;gap:8px;
   padding:16px 40px;
-  border-radius:var(--radius);
   font-size:1.05rem;font-weight:600;
+  font-family:var(--font-sans);
   color:#fff;
   background:linear-gradient(135deg,var(--cyan),var(--violet));
-  border:none;
-  cursor:pointer;
-  text-decoration:none;
-  transition:transform .2s,box-shadow .2s;
-  box-shadow:0 4px 24px rgba(0,212,255,.25);
+  border:2px solid var(--cyan);
+  border-radius:0;
+  cursor:pointer;text-decoration:none;
+  position:relative;
+  transition:transform .2s;
+  box-shadow:
+    0 2px 8px rgba(0,212,255,.15),
+    inset 0 0 0 2px rgba(255,255,255,.1);
 }
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,212,255,.35)}
-.hero-cta:active{transform:translateY(0)}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,212,255,.3),inset 0 0 0 2px rgba(255,255,255,.2)}
+.hero-cta:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,212,255,.2),inset 0 0 0 3px rgba(255,255,255,.15)}
 
 .hero-scroll-hint{
   position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
@@ -217,11 +287,12 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
 .timeline-item:last-child{padding-bottom:0}
 .timeline-dot{
   position:absolute;left:24px;top:4px;
-  width:18px;height:18px;border-radius:50%;
-  background:var(--bg-dark);border:3px solid var(--cyan);
+  width:16px;height:16px;border-radius:0;
+  background:var(--cyan);border:none;
   z-index:1;
+  box-shadow:3px 3px 0 rgba(0,212,255,.3);
 }
-.timeline-item:nth-child(even) .timeline-dot{border-color:var(--violet)}
+.timeline-item:nth-child(even) .timeline-dot{background:var(--violet);box-shadow:3px 3px 0 rgba(124,58,237,.3)}
 .timeline-date{
   font-size:.85rem;font-weight:600;color:var(--cyan);
   margin-bottom:4px;
@@ -251,8 +322,18 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
   overflow:hidden;
 }
 .prize-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,.2);box-shadow:0 12px 40px rgba(0,0,0,.3)}
-.prize-card.gold{border-color:rgba(255,215,0,.2)}
-.prize-card.gold:hover{border-color:rgba(255,215,0,.4)}
+.prize-card.gold{
+  border-radius:0;
+  border:2px solid rgba(0,212,255,.4);
+  box-shadow:inset 0 0 0 2px rgba(0,212,255,.15);
+  background:linear-gradient(135deg,var(--bg-card),#1a1a3a);
+}
+.prize-card.gold::before{
+  content:'⬛⬛';position:absolute;top:8px;left:8px;
+  font-size:8px;color:var(--cyan);letter-spacing:1px;
+  opacity:.5;
+}
+.prize-card.gold:hover{border-color:var(--cyan);box-shadow:inset 0 0 0 2px rgba(0,212,255,.3),0 12px 40px rgba(0,0,0,.4)}
 .prize-icon{font-size:2.8rem;margin-bottom:16px}
 .prize-name{font-size:1.15rem;font-weight:700;margin-bottom:4px}
 .prize-amount{
@@ -288,15 +369,20 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
 .reg-cta{
   display:inline-flex;align-items:center;gap:8px;
   padding:14px 36px;
-  border-radius:var(--radius);
   font-size:1rem;font-weight:600;
+  font-family:var(--font-sans);
   color:#fff;
   background:linear-gradient(135deg,var(--cyan),var(--violet));
-  border:none;cursor:pointer;text-decoration:none;
-  transition:transform .2s,box-shadow .2s;
-  box-shadow:0 4px 20px rgba(0,212,255,.2);
+  border:2px solid var(--cyan);
+  border-radius:0;
+  cursor:pointer;text-decoration:none;
+  position:relative;
+  transition:transform .2s;
+  box-shadow:
+    0 2px 8px rgba(0,212,255,.15),
+    inset 0 0 0 2px rgba(255,255,255,.1);
 }
-.reg-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,.3)}
+.reg-cta:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,212,255,.3),inset 0 0 0 2px rgba(255,255,255,.2)}
 .reg-note{
   margin-top:16px;font-size:.8rem;color:var(--text-secondary);
 }
@@ -313,12 +399,13 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
 .modal-overlay.open{opacity:1;visibility:visible}
 .modal-content{
   background:var(--bg-card);
-  border-radius:var(--radius-lg);
+  border-radius:0;
   width:100%;max-width:640px;
   max-height:90vh;overflow-y:auto;
   padding:32px;
   position:relative;
-  border:1px solid var(--border);
+  border:2px solid var(--cyan);
+  box-shadow:inset 0 0 0 2px rgba(0,212,255,.1),0 8px 32px rgba(0,0,0,.5);
   transform:translateY(20px) scale(.97);
   transition:transform .3s;
 }
@@ -337,9 +424,10 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
 .modal-iframe-wrap{
   position:relative;
   width:100%;min-height:500px;
-  border-radius:var(--radius);
+  border-radius:0;
   overflow:hidden;
   background:var(--bg-elevated);
+  border:2px solid rgba(0,212,255,.2);
 }
 .modal-iframe-wrap iframe{
   width:100%;height:500px;border:none;
@@ -355,11 +443,14 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
 .modal-spinner{
   width:32px;height:32px;
   border:3px solid var(--border);
-  border-top-color:var(--cyan);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
+  background:var(--cyan);
+  border-radius:0;
+  animation:pixel-pulse .8s ease-in-out infinite;
 }
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pixel-pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.7)}
+}
 .modal-error{
   display:none;
   text-align:center;padding:40px 20px;
@@ -457,8 +548,10 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <!-- ==================== Hero ==================== -->
 <section class="hero" id="hero">
   <div class="hero-grid"></div>
+  <div class="hero-stars"></div>
   <div class="hero-content">
-    <div class="hero-badge">2026 · 年度黑客松</div>
+    <div class="hero-badge">2026 · HACKATHON</div>
+    <p class="hero-pixel-subtitle">AI HACKATHON 2026</p>
     <h1>
       CHANCETOP<br>
       <span class="highlight">2026 黑客松</span>
@@ -466,7 +559,7 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
     <p class="hero-tagline">AI · 创新 · 未来</p>
     <p class="hero-date"><strong>2026.06.15</strong> — <strong>2026.06.17</strong></p>
     <a href="#register" class="hero-cta">
-      立即报名
+      ▸ 立即报名
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
@@ -480,37 +573,32 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <section id="schedule">
   <div class="container">
     <h2 class="section-title reveal">赛事赛程</h2>
+    <div class="pixel-divider reveal"></div>
     <p class="section-subtitle reveal">为期三天的 AI 黑客松，从创意到落地</p>
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 1 日前</div>
+        <div class="timeline-date">6 月 14 日前</div>
         <div class="timeline-title">报名截止</div>
         <div class="timeline-desc">在线提交团队信息与项目方向简介</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 15 日 · 09:00</div>
-        <div class="timeline-title">开幕式 &amp; 组队</div>
-        <div class="timeline-desc">主题演讲、赛题公布、自由组队</div>
+        <div class="timeline-date">6 月 15 日 · 全天</div>
+        <div class="timeline-title">开发日 ①</div>
+        <div class="timeline-desc">开幕式 &amp; 赛题公布 &amp; 组队 &amp; 自由开发</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 15 日 — 6 月 17 日</div>
-        <div class="timeline-title">黑客松进行时</div>
-        <div class="timeline-desc">48 小时极限开发，期间安排导师指导与技术分享</div>
+        <div class="timeline-date">6 月 16 日 · 全天</div>
+        <div class="timeline-title">开发日 ②</div>
+        <div class="timeline-desc">导师指导 &amp; 技术分享 &amp; 自由开发</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 17 日 · 15:00</div>
-        <div class="timeline-title">作品提交截止 &amp; 评审</div>
-        <div class="timeline-desc">代码提交、项目演示、评委评审</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 17 日 · 19:00</div>
-        <div class="timeline-title">颁奖典礼</div>
-        <div class="timeline-desc">结果公布 &amp; 颁奖 &amp; 闭幕</div>
+        <div class="timeline-date">6 月 17 日 · 全天</div>
+        <div class="timeline-title">答辩路演</div>
+        <div class="timeline-desc">作品提交 &amp; 项目演示 &amp; 评委评审 &amp; 颁奖典礼</div>
       </div>
     </div>
   </div>
@@ -520,31 +608,32 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <section id="prizes">
   <div class="container">
     <h2 class="section-title reveal">奖项设置</h2>
+    <div class="pixel-divider reveal"></div>
     <p class="section-subtitle reveal">丰厚奖励，等你来拿</p>
     <div class="prize-grid">
       <div class="prize-card gold reveal">
         <div class="prize-icon">🥇</div>
         <div class="prize-name">一等奖</div>
-        <div class="prize-amount">¥50,000</div>
-        <div class="prize-desc">冠军团队 · 现金奖励 + 荣誉证书 + 直通加速器机会</div>
+        <div class="prize-amount">¥500,000</div>
+        <div class="prize-desc">1 名 · 现金奖励 + 荣誉证书 + 直通加速器</div>
       </div>
       <div class="prize-card reveal">
         <div class="prize-icon">🥈</div>
         <div class="prize-name">二等奖</div>
-        <div class="prize-amount">¥30,000</div>
-        <div class="prize-desc">亚军团队 · 现金奖励 + 荣誉证书</div>
+        <div class="prize-amount">¥100,000</div>
+        <div class="prize-desc">5 名 · 现金奖励 + 荣誉证书</div>
       </div>
       <div class="prize-card reveal">
         <div class="prize-icon">🥉</div>
         <div class="prize-name">三等奖</div>
-        <div class="prize-amount">¥10,000</div>
-        <div class="prize-desc">季军团队 · 现金奖励 + 荣誉证书</div>
+        <div class="prize-amount">¥50,000</div>
+        <div class="prize-desc">10 名 · 现金奖励 + 荣誉证书</div>
       </div>
       <div class="prize-card reveal">
         <div class="prize-icon">🏆</div>
         <div class="prize-name">最佳创新奖</div>
-        <div class="prize-amount">¥8,000</div>
-        <div class="prize-desc">最具创意项目 · 专项奖金</div>
+        <div class="prize-amount">¥30,000</div>
+        <div class="prize-desc">1 名 · 最具创意项目专项奖金</div>
       </div>
     </div>
   </div>
@@ -554,6 +643,7 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <section id="register" class="registration">
   <div class="container">
     <h2 class="section-title reveal">立即报名</h2>
+    <div class="pixel-divider reveal"></div>
     <p class="section-subtitle reveal">用 AI 改变世界，从这次黑客松开始</p>
     <div class="registration-card reveal">
       <h3>加入 Chancetop 2026 黑客松</h3>
@@ -562,7 +652,7 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
         填写报名表
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
       </button>
-      <p class="reg-note">报名表链接待确认，将在上线前更新。如有任何疑问，请联系 <a href="mailto:hackathon@chancetop.com" style="color:var(--cyan);text-decoration:none;">hackathon@chancetop.com</a></p>
+      <p class="reg-note">使用腾讯问卷提交报名，提交后您将收到确认邮件。如有疑问请联系 <a href="mailto:hackathon@chancetop.com" style="color:var(--cyan);text-decoration:none;">hackathon@chancetop.com</a></p>
     </div>
   </div>
 </section>
@@ -590,7 +680,7 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
         sandbox="allow-scripts allow-forms allow-same-origin allow-popups">
       </iframe>
     </div>
-    <p style="text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:12px;">提交后您将收到确认邮件</p>
+    <p style="text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:12px;">腾讯问卷 · 提交后您将收到确认邮件</p>
   </div>
 </div>
 
@@ -628,6 +718,20 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
         navLinks.classList.remove('open');
       });
     });
+  }
+
+  /* --- 8-bit twinkling stars for Hero --- */
+  var starsContainer = document.querySelector('.hero-stars');
+  if(starsContainer){
+    for(var i=0; i<12; i++){
+      var star = document.createElement('div');
+      star.className = 'pixel-star';
+      star.style.left = (Math.random() * 90 + 5) + '%';
+      star.style.top = (Math.random() * 80 + 10) + '%';
+      star.style.animationDelay = (Math.random() * 5) + 's';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      starsContainer.appendChild(star);
+    }
   }
 
   /* --- Scroll reveal with IntersectionObserver --- */
