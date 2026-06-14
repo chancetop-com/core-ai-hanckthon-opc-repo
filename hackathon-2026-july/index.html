@@ -305,42 +305,12 @@ nav .container{
 .prize-card.gold:hover{border-color:var(--orange-dark);box-shadow:0 0 0 2px var(--orange-border),0 8px 24px rgba(226,89,42,.1)}
 .prize-icon{font-size:2.4rem;margin-bottom:10px;display:block}
 .prize-name{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.prize-amount{
+  font-size:1.6rem;font-weight:800;
+  color:var(--orange);
+  margin-bottom:8px;
+}
 .prize-desc{font-size:.85rem;color:var(--text-secondary);line-height:1.5}
-
-/* ========== Judges ========== */
-.judges-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:24px;
-  max-width:800px;margin:0 auto;
-}
-.judge-card{
-  text-align:center;
-  padding:32px 20px 28px;
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  transition:transform .3s,box-shadow .3s;
-}
-.judge-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
-.judge-avatar{
-  width:80px;height:80px;
-  border-radius:50%;
-  background:var(--orange-bg);
-  border:2px solid var(--orange-border);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 14px;
-  font-size:2rem;
-}
-.judge-name{
-  font-size:1.05rem;font-weight:700;margin-bottom:2px;
-}
-.judge-title{
-  font-size:.82rem;color:var(--text-muted);margin-bottom:8px;
-}
-.judge-bio{
-  font-size:.85rem;color:var(--text-secondary);line-height:1.5;
-}
 
 /* ========== FAQ ========== */
 .faq-list{max-width:680px;margin:0 auto}
@@ -491,7 +461,6 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
   .nav-toggle{display:flex}
   .schedule-grid{grid-template-columns:1fr}
   .prize-grid{grid-template-columns:1fr}
-  .judges-grid{grid-template-columns:repeat(2,1fr)}
   .reg-wrap{padding:28px 20px}
   .hero-actions{flex-direction:column;align-items:center}
   .about-highlights{grid-template-columns:repeat(2,1fr)}
@@ -500,7 +469,6 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
   .hero{padding-top:calc(var(--nav-h) + 40px)}
   .btn,.btn-lg{width:100%;justify-content:center}
   .schedule-day{padding:20px}
-  .judges-grid{grid-template-columns:1fr}
   .about-highlights{grid-template-columns:1fr}
 }
 @media(max-width:360px){
@@ -551,7 +519,7 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
   <div class="hero-content">
     <div class="internal-badge">🔒 内部活动 · 仅限 ChanceTop 员工</div>
     <h1>ChanceTop <span class="highlight">2026</span><br>内部黑客松</h1>
-    <p class="hero-tagline">48 小时 · 用代码碰撞创意 · 让 innovation 发生</p>
+    <p class="hero-tagline">代码不止，创意无界</p>
     <p class="hero-date">📅 2026.07.16 (四) 09:00 — 07.18 (六) 17:00</p>
     <p class="hero-venue">📍 厦门总部 · 3F 创新空间</p>
     <div class="hero-actions">
@@ -698,61 +666,25 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
       <div class="prize-card gold">
         <span class="prize-icon">🥇</span>
         <h3 class="prize-name">一等奖</h3>
-        <p class="prize-desc">冠军团队 · 奖品待公布</p>
+        <p class="prize-amount">¥15,000</p>
+        <p class="prize-desc">1 名 · 现金奖励</p>
       </div>
       <div class="prize-card">
         <span class="prize-icon">🥈</span>
         <h3 class="prize-name">二等奖</h3>
-        <p class="prize-desc">亚军团队 · 奖品待公布</p>
+        <p class="prize-amount">¥8,000</p>
+        <p class="prize-desc">1 名 · 现金奖励</p>
       </div>
       <div class="prize-card">
         <span class="prize-icon">🥉</span>
         <h3 class="prize-name">三等奖</h3>
-        <p class="prize-desc">季军团队 · 奖品待公布</p>
-      </div>
-      <div class="prize-card">
-        <span class="prize-icon">💡</span>
-        <h3 class="prize-name">最佳创意奖</h3>
-        <p class="prize-desc">最具创新性方案 · 奖品待公布</p>
-      </div>
-      <div class="prize-card">
-        <span class="prize-icon">❤️</span>
-        <h3 class="prize-name">最受欢迎奖</h3>
-        <p class="prize-desc">全员投票选出 · 奖品待公布</p>
+        <p class="prize-amount">¥3,000</p>
+        <p class="prize-desc">3 名 · 现金奖励</p>
       </div>
     </div>
-    <p class="section-subtitle" style="margin-top:24px;font-size:.9rem;color:var(--text-muted)">
-      🏅 完整奖项详情由 PM 确认后更新
+    <p class="section-subtitle" style="margin-top:28px;font-size:.9rem;color:var(--text-muted)">
+      🏅 总奖池 <strong>¥32,000</strong> · 技术委员会 &amp; 管理层组成内部评审团
     </p>
-  </div>
-</section>
-
-<!-- ==================== Judges ==================== -->
-<section class="section section-alt" id="judges">
-  <div class="container">
-    <h2 class="section-title reveal">评审阵容</h2>
-    <div class="section-divider reveal"></div>
-    <p class="section-subtitle reveal">由公司技术委员会 &amp; 管理团队组成评审团</p>
-    <div class="judges-grid reveal">
-      <div class="judge-card">
-        <div class="judge-avatar">👤</div>
-        <h3 class="judge-name">评委待确认</h3>
-        <p class="judge-title">—</p>
-        <p class="judge-bio">评审名单由 PM 确认后更新</p>
-      </div>
-      <div class="judge-card">
-        <div class="judge-avatar">👤</div>
-        <h3 class="judge-name">评委待确认</h3>
-        <p class="judge-title">—</p>
-        <p class="judge-bio">评审名单由 PM 确认后更新</p>
-      </div>
-      <div class="judge-card">
-        <div class="judge-avatar">👤</div>
-        <h3 class="judge-name">评委待确认</h3>
-        <p class="judge-title">—</p>
-        <p class="judge-bio">评审名单由 PM 确认后更新</p>
-      </div>
-    </div>
   </div>
 </section>
 
