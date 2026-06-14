@@ -91,6 +91,7 @@ img{max-width:100%}
 }
 .btn-outline:hover{background:var(--orange-bg)}
 .btn-lg{padding:16px 40px;font-size:1.05rem}
+.btn-sm{padding:10px 20px;font-size:.85rem}
 
 /* ========== Nav ========== */
 nav{
@@ -111,7 +112,7 @@ nav .container{
 }
 .nav-logo svg{height:28px;width:auto;display:block}
 .nav-logo span{font-size:1.05rem;letter-spacing:.03em}
-.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center}
 .nav-links a{
   color:var(--text-secondary);text-decoration:none;
   font-size:.875rem;font-weight:500;
@@ -227,7 +228,7 @@ nav .container{
 .highlight-card h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .highlight-card p{font-size:.85rem;color:var(--text-secondary)}
 
-/* ========== Schedule (Timeline) ========== */
+/* ========== Schedule ========== */
 .schedule-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -302,6 +303,41 @@ nav .container{
 }
 .prize-total strong{color:var(--orange);font-weight:700}
 
+/* ========== Judges ========== */
+.judges-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  max-width:900px;margin:0 auto;
+}
+.judge-card{
+  text-align:center;
+  padding:32px 20px 28px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition:transform .3s,box-shadow .3s;
+}
+.judge-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.judge-avatar{
+  width:80px;height:80px;
+  border-radius:50%;
+  background:var(--orange-bg);
+  border:2px solid var(--orange-border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+  font-size:2rem;
+}
+.judge-name{
+  font-size:1.05rem;font-weight:700;margin-bottom:2px;
+}
+.judge-title{
+  font-size:.82rem;color:var(--text-muted);margin-bottom:8px;
+}
+.judge-bio{
+  font-size:.85rem;color:var(--text-secondary);line-height:1.5;
+}
+
 /* ========== FAQ ========== */
 .faq-list{max-width:680px;margin:0 auto}
 details.faq-item{
@@ -345,9 +381,7 @@ details.faq-item .faq-answer{
 }
 
 /* ========== Registration ========== */
-.registration{
-  text-align:center;
-}
+.registration{text-align:center}
 .reg-card{
   max-width:560px;margin:0 auto;
   background:var(--bg-card);
@@ -361,7 +395,7 @@ details.faq-item .faq-answer{
 .reg-card .reg-note a{color:var(--orange);text-decoration:none}
 .reg-card .reg-note a:hover{text-decoration:underline}
 
-/* ========== Modal ========== */
+/* ========== Modal / Form ========== */
 .modal-overlay{
   position:fixed;inset:0;z-index:2000;
   background:rgba(0,0,0,.5);
@@ -374,7 +408,7 @@ details.faq-item .faq-answer{
 .modal-content{
   background:var(--bg);
   border-radius:var(--radius-lg);
-  width:100%;max-width:640px;
+  width:100%;max-width:520px;
   max-height:90vh;overflow-y:auto;
   padding:32px;
   position:relative;
@@ -394,37 +428,56 @@ details.faq-item .faq-answer{
 }
 .modal-close:hover{background:var(--bg-alt);color:var(--text-primary)}
 .modal-title{font-size:1.15rem;font-weight:700;margin-bottom:20px;text-align:center}
-.modal-iframe-wrap{
-  position:relative;
-  width:100%;min-height:500px;
-  border-radius:var(--radius);
-  overflow:hidden;
-  background:var(--bg-alt);
-  border:1px solid var(--border);
+.form-group{margin-bottom:18px;text-align:left}
+.form-group label{
+  display:block;
+  font-size:.85rem;font-weight:600;
+  color:var(--text-primary);
+  margin-bottom:6px;
 }
-.modal-iframe-wrap iframe{width:100%;height:500px;border:none;display:block}
-.modal-loading{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;
-  color:var(--text-secondary);
+.form-group label .required{color:var(--orange);margin-left:2px}
+.form-group input,
+.form-group select{
+  width:100%;
+  padding:10px 14px;
   font-size:.9rem;
-  background:var(--bg-alt);
+  font-family:var(--font-sans);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--bg);
+  color:var(--text-primary);
+  transition:border-color .2s,box-shadow .2s;
+  outline:none;
 }
-.modal-spinner{
-  width:36px;height:36px;
-  border:3px solid var(--border);
-  border-top-color:var(--orange);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
+.form-group input:focus,
+.form-group select:focus{
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-bg);
 }
-@keyframes spin{to{transform:rotate(360deg)}}
-.modal-error{
+.form-group input.error,
+.form-group select.error{
+  border-color:#d32f2f;
+  box-shadow:0 0 0 3px rgba(211,47,47,.08);
+}
+.form-group .error-msg{
+  font-size:.78rem;
+  color:#d32f2f;
+  margin-top:4px;
   display:none;
-  text-align:center;padding:40px 20px;
 }
-.modal-error.show{display:block}
-.modal-error p{color:var(--text-secondary);margin-bottom:16px}
+.form-group .error-msg.show{display:block}
+.form-success{
+  display:none;
+  text-align:center;
+  padding:30px 20px;
+}
+.form-success.show{display:block}
+.form-success .success-icon{
+  font-size:3rem;margin-bottom:12px;display:block;
+}
+.form-success h4{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.form-success p{font-size:.9rem;color:var(--text-secondary);margin-bottom:4px}
+.form-submit-wrap{text-align:center;margin-top:8px}
 
 /* ========== Footer ========== */
 footer{
@@ -480,16 +533,21 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
   .nav-toggle{display:flex}
   .schedule-grid{grid-template-columns:1fr}
   .prize-grid{grid-template-columns:1fr}
+  .judges-grid{grid-template-columns:repeat(2,1fr)}
   .reg-card{padding:36px 24px}
   .hero-actions{flex-direction:column;align-items:center}
-  .modal-iframe-wrap{min-height:400px}
-  .modal-iframe-wrap iframe{height:400px}
 }
 @media(max-width:480px){
   .hero{padding-top:calc(var(--nav-h) + 40px)}
   .btn,.btn-lg{width:100%;justify-content:center}
   .modal-content{padding:24px 16px}
   .schedule-day{padding:20px}
+  .judges-grid{grid-template-columns:1fr}
+}
+@media(max-width:360px){
+  .container{padding:0 16px}
+  .section-title{font-size:1.3rem}
+  .hero h1{font-size:1.6rem}
 }
 </style>
 </head>
@@ -544,6 +602,7 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
       <li><a href="#home">首页</a></li>
       <li><a href="#schedule">赛程</a></li>
       <li><a href="#prizes">奖项</a></li>
+      <li><a href="#judges">评委</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#register" class="nav-cta">立即报名</a></li>
     </ul>
@@ -562,7 +621,7 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
     </h1>
     <p class="hero-tagline">AI · 创新 · 未来</p>
     <p class="hero-prize">总奖池 ¥500,000</p>
-    <p class="hero-date"><strong>2026.06.16</strong> — <strong>2026.06.17</strong>  ·  内部员工赛</p>
+    <p class="hero-date"><strong>2026.06.16</strong> — <strong>2026.06.17</strong></p>
     <div class="hero-actions">
       <a href="#register" class="btn btn-lg">立即报名</a>
       <a href="#schedule" class="btn btn-outline btn-lg">了解更多</a>
@@ -688,8 +747,43 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
   </div>
 </section>
 
+<!-- ==================== Judges ==================== -->
+<section class="section" id="judges">
+  <div class="container">
+    <h2 class="section-title reveal">评委阵容</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">行业领袖坐镇，为优秀作品加冕</p>
+    <div class="judges-grid reveal">
+      <div class="judge-card">
+        <div class="judge-avatar">👨‍💻</div>
+        <div class="judge-name">黄仁勋</div>
+        <div class="judge-title">Jensen Huang</div>
+        <div class="judge-bio">NVIDIA 创始人兼 CEO，AI 计算领域的先驱</div>
+      </div>
+      <div class="judge-card">
+        <div class="judge-avatar">🤖</div>
+        <div class="judge-name">Sam Altman</div>
+        <div class="judge-title">山姆·奥特曼</div>
+        <div class="judge-bio">OpenAI CEO，推动通用人工智能发展的领军人</div>
+      </div>
+      <div class="judge-card">
+        <div class="judge-avatar">📊</div>
+        <div class="judge-name">瑞·达利欧</div>
+        <div class="judge-title">Ray Dalio</div>
+        <div class="judge-bio">桥水基金创始人，全球顶级投资者与思想家</div>
+      </div>
+      <div class="judge-card">
+        <div class="judge-avatar">🏆</div>
+        <div class="judge-name">特然普</div>
+        <div class="judge-title">特邀评委</div>
+        <div class="judge-bio">商业领袖，跨界创新推动者</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== FAQ ==================== -->
-<section class="section" id="faq">
+<section class="section section-alt" id="faq">
   <div class="container">
     <h2 class="section-title reveal">常见问题</h2>
     <div class="section-divider reveal"></div>
@@ -698,19 +792,19 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
       <details class="faq-item">
         <summary>谁可以参加？</summary>
         <div class="faq-answer">
-          <p>Chance Top 全体正式员工均可参赛。欢迎跨部门组队。个人或团队（2-4人）均可参赛。</p>
+          <p>Chance Top 全体正式员工均可参赛。欢迎跨部门组队，鼓励开发者、设计师、产品经理等不同角色联合组队。个人或团队（2-4人）均可报名。</p>
         </div>
       </details>
       <details class="faq-item">
         <summary>团队最多几个人？</summary>
         <div class="faq-answer">
-          <p>每支队伍 2-4 人。可以提前组队报名，也可以在开幕式当天现场组队。我们鼓励跨角色组队（开发者 + 设计师 + 产品经理）。</p>
+          <p>每支队伍 2-4 人。可以提前组队报名，也可以在开幕式当天现场组队。</p>
         </div>
       </details>
       <details class="faq-item">
         <summary>作品归属权归谁？</summary>
         <div class="faq-answer">
-          <p>参赛作品的 all 知识产权归参赛团队所有。主办方仅保留在活动宣传中使用项目展示的权利（如照片、介绍、Demo 视频等）。</p>
+          <p>参赛作品的知识产权归参赛团队所有。主办方仅保留在活动宣传中使用项目展示的权利（如照片、介绍、Demo 视频等）。</p>
         </div>
       </details>
       <details class="faq-item">
@@ -730,76 +824,78 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
 </section>
 
 <!-- ==================== Registration ==================== -->
-<section class="section section-alt registration" id="register">
+<section class="section registration" id="register">
   <div class="container">
     <h2 class="section-title reveal">立即报名</h2>
     <div class="section-divider reveal"></div>
     <p class="section-subtitle reveal">用 AI 改变世界，从这次黑客松开始</p>
     <div class="reg-card reveal">
       <h3>加入 Chance Top 2026 黑客松</h3>
-      <p>内部员工可直接邮件报名。报名截止：<strong>2026.06.15 23:59</strong>。</p>
+      <p>填写报名表，组队参赛。报名截止：<strong>2026.06.15 23:59</strong>。</p>
       <button class="btn btn-lg" id="openModalBtn">
-        发送报名邮件
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        填写报名表
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
-      <p class="reg-note">如有疑问请联系 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a></p>
+      <p class="reg-note">提交后数据将本地保存。如有疑问请联系 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a></p>
     </div>
   </div>
 </section>
 
-<!-- ==================== Registration Modal (Email) ==================== -->
+<!-- ==================== Registration Modal ==================== -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-content">
     <button class="modal-close" id="modalCloseBtn" aria-label="关闭">✕</button>
-    <div class="modal-icon" style="text-align:center;font-size:2.4rem;margin-bottom:12px;">📧</div>
-    <h3 style="font-size:1.2rem;font-weight:700;text-align:center;margin-bottom:6px;">邮件报名</h3>
-    <p style="text-align:center;color:var(--text-secondary);font-size:.9rem;margin-bottom:24px;">请发送邮件至以下地址，按格式填写报名信息</p>
-
-    <ul style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;">
-      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">收件人</span>
-        <span><a href="mailto:hackathon@chancetop.com" style="color:var(--orange);text-decoration:none;">hackathon@chancetop.com</a></span>
-      </li>
-      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">邮件标题</span>
-        <span style="font-size:.85rem;color:var(--text-secondary)">黑客松报名 - [您的姓名]</span>
-      </li>
-    </ul>
-
-    <p style="font-weight:600;font-size:.9rem;margin-bottom:12px;">邮件正文请填写以下信息：</p>
-    <ul style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;">
-      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">姓名</span>
-        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填</span>
-      </li>
-      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">手机号</span>
-        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填</span>
-      </li>
-      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">邮箱</span>
-        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填</span>
-      </li>
-      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">团队名称</span>
-        <span style="font-size:.75rem;color:var(--text-muted)">选填</span>
-      </li>
-      <li style="list-style:none;padding:8px 0;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:600;color:var(--text-primary)">角色</span>
-        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填（开发者/设计师/产品经理/其他）</span>
-      </li>
-    </ul>
-
-    <div style="text-align:center;margin-bottom:16px;">
-      <a href="mailto:hackathon@chancetop.com?subject=黑客松报名&body=姓名：%0A手机号：%0A邮箱：%0A团队名称（选填）：%0A角色：%0A%0A——请填写以上信息，谢谢！" class="btn btn-lg" target="_blank">
-        打开邮箱发送
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      </a>
+    <div class="modal-title">Chance Top 2026 黑客松 · 报名表</div>
+    <form id="regForm" novalidate>
+      <div class="form-group">
+        <label>姓名 <span class="required">*</span></label>
+        <input type="text" id="fieldName" required placeholder="请输入您的姓名" autocomplete="name">
+        <div class="error-msg" id="errName">请输入姓名</div>
+      </div>
+      <div class="form-group">
+        <label>手机 <span class="required">*</span></label>
+        <input type="tel" id="fieldPhone" required placeholder="请输入手机号" autocomplete="tel">
+        <div class="error-msg" id="errPhone">请输入有效的手机号</div>
+      </div>
+      <div class="form-group">
+        <label>邮箱 <span class="required">*</span></label>
+        <input type="email" id="fieldEmail" required placeholder="请输入公司邮箱" autocomplete="email">
+        <div class="error-msg" id="errEmail">请输入有效的邮箱地址</div>
+      </div>
+      <div class="form-group">
+        <label>团队名称 <span style="color:var(--text-muted);font-weight:400;font-size:.78rem;">（选填）</span></label>
+        <input type="text" id="fieldTeam" placeholder="单人参赛请留空">
+      </div>
+      <div class="form-group">
+        <label>角色 <span class="required">*</span></label>
+        <select id="fieldRole" required>
+          <option value="">请选择您的角色</option>
+          <option value="developer">开发者</option>
+          <option value="designer">设计师</option>
+          <option value="pm">产品经理</option>
+          <option value="other">其他</option>
+        </select>
+        <div class="error-msg" id="errRole">请选择角色</div>
+      </div>
+      <div class="form-submit-wrap">
+        <button type="submit" class="btn btn-lg" id="submitRegBtn">
+          提交报名
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p style="text-align:center;font-size:.78rem;color:var(--text-muted);margin-top:14px;">
+        或通过邮件报名：<a href="mailto:hackathon@chancetop.com?subject=黑客松报名&amp;body=姓名：%0A手机：%0A邮箱：%0A团队名称：%0A角色：">hackathon@chancetop.com</a>
+      </p>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <span class="success-icon">✅</span>
+      <h4>报名成功！</h4>
+      <p>我们已经收到您的报名信息。</p>
+      <p style="font-size:.85rem;">确认邮件将发送至您的邮箱，请注意查收。</p>
+      <p style="margin-top:20px;">
+        <button class="btn btn-sm" onclick="document.getElementById('modalCloseBtn').click();">关闭</button>
+      </p>
     </div>
-    <p style="text-align:center;font-size:.8rem;color:var(--text-muted);line-height:1.6;">
-      发送后主办方将通过邮件确认报名成功。<br>
-      如有问题请联系 <a href="mailto:hackathon@chancetop.com" style="color:var(--orange);font-weight:500;text-decoration:none;">hackathon@chancetop.com</a>
-    </p>
   </div>
 </div>
 
@@ -824,6 +920,7 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
       <li><a href="#home">首页</a></li>
       <li><a href="#schedule">赛程</a></li>
       <li><a href="#prizes">奖项</a></li>
+      <li><a href="#judges">评委</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#register">报名</a></li>
     </ul>
@@ -866,10 +963,23 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
     revealEls.forEach(function(el){ el.classList.add('visible'); });
   }
 
-  /* Registration modal (email) */
+  /* Registration modal + inline form */
   var modalOverlay = document.getElementById('modalOverlay');
   var openBtn = document.getElementById('openModalBtn');
   var closeBtn = document.getElementById('modalCloseBtn');
+  var regForm = document.getElementById('regForm');
+  var formSuccess = document.getElementById('formSuccess');
+
+  var fieldName = document.getElementById('fieldName');
+  var fieldPhone = document.getElementById('fieldPhone');
+  var fieldEmail = document.getElementById('fieldEmail');
+  var fieldTeam = document.getElementById('fieldTeam');
+  var fieldRole = document.getElementById('fieldRole');
+
+  var errName = document.getElementById('errName');
+  var errPhone = document.getElementById('errPhone');
+  var errEmail = document.getElementById('errEmail');
+  var errRole = document.getElementById('errRole');
 
   function openModal(){
     modalOverlay.classList.add('open');
@@ -878,6 +988,10 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
   function closeModal(){
     modalOverlay.classList.remove('open');
     document.body.style.overflow = '';
+    if(formSuccess.classList.contains('show')){
+      formSuccess.classList.remove('show');
+      regForm.style.display = 'block';
+    }
   }
   if(openBtn && modalOverlay){
     openBtn.addEventListener('click', openModal);
@@ -887,6 +1001,60 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
     });
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+    });
+  }
+
+  function setError(el, msgEl, show){
+    if(show){ el.classList.add('error'); msgEl.classList.add('show'); }
+    else { el.classList.remove('error'); msgEl.classList.remove('show'); }
+  }
+  function validatePhone(v){ return /^1[3-9]\d{9}$/.test(v); }
+  function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  if(regForm){
+    regForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var valid = true;
+      if(!fieldName.value.trim()){ setError(fieldName, errName, true); valid = false; }
+      else { setError(fieldName, errName, false); }
+      if(!validatePhone(fieldPhone.value.trim())){ setError(fieldPhone, errPhone, true); valid = false; }
+      else { setError(fieldPhone, errPhone, false); }
+      if(!validateEmail(fieldEmail.value.trim())){ setError(fieldEmail, errEmail, true); valid = false; }
+      else { setError(fieldEmail, errEmail, false); }
+      if(!fieldRole.value){ setError(fieldRole, errRole, true); valid = false; }
+      else { setError(fieldRole, errRole, false); }
+      if(!valid) return;
+
+      var regData = {
+        name: fieldName.value.trim(),
+        phone: fieldPhone.value.trim(),
+        email: fieldEmail.value.trim(),
+        team: fieldTeam.value.trim() || '(单人参赛)',
+        role: fieldRole.value
+      };
+      try {
+        var existing = JSON.parse(localStorage.getItem('hackathon_registrations') || '[]');
+        existing.push(regData);
+        localStorage.setItem('hackathon_registrations', JSON.stringify(existing));
+      } catch(e){}
+
+      regForm.style.display = 'none';
+      formSuccess.classList.add('show');
+    });
+
+    [fieldName, fieldPhone, fieldEmail, fieldTeam, fieldRole].forEach(function(el){
+      if(!el) return;
+      el.addEventListener('input', function(){
+        if(el.classList.contains('error')){
+          el.classList.remove('error');
+          var errId;
+          if(el === fieldName) errId = 'errName';
+          else if(el === fieldPhone) errId = 'errPhone';
+          else if(el === fieldEmail) errId = 'errEmail';
+          else if(el === fieldRole) errId = 'errRole';
+          if(errId) document.getElementById(errId).classList.remove('show');
+        }
+      });
     });
   }
 
