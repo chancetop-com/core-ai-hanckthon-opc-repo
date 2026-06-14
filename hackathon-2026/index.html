@@ -737,40 +737,69 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
     <p class="section-subtitle reveal">用 AI 改变世界，从这次黑客松开始</p>
     <div class="reg-card reveal">
       <h3>加入 Chance Top 2026 黑客松</h3>
-      <p>填写报名表，组队参赛。报名截止：<strong>2026.06.15 23:59</strong>。我们将在收到报名后通过邮件确认。</p>
+      <p>内部员工可直接邮件报名。报名截止：<strong>2026.06.15 23:59</strong>。</p>
       <button class="btn btn-lg" id="openModalBtn">
-        填写报名表
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        发送报名邮件
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </button>
-      <p class="reg-note">使用腾讯问卷提交报名，提交后您将收到确认邮件。如有疑问请联系 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a></p>
+      <p class="reg-note">如有疑问请联系 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a></p>
     </div>
   </div>
 </section>
 
-<!-- ==================== Registration Modal ==================== -->
+<!-- ==================== Registration Modal (Email) ==================== -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-content">
     <button class="modal-close" id="modalCloseBtn" aria-label="关闭">✕</button>
-    <div class="modal-title">Chance Top 2026 黑客松 · 报名表</div>
-    <div class="modal-iframe-wrap">
-      <div class="modal-loading" id="modalLoading">
-        <div class="modal-spinner"></div>
-        <span>加载报名表中…</span>
-      </div>
-      <div class="modal-error" id="modalError">
-        <p>报名表加载失败</p>
-        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:none;font-weight:500;">
-          点击此处在新窗口打开报名表 →
-        </a>
-      </div>
-      <iframe id="formIframe"
-        src="about:blank"
-        title="报名表"
-        allow="fullscreen"
-        sandbox="allow-scripts allow-forms allow-same-origin allow-popups">
-      </iframe>
+    <div class="modal-icon" style="text-align:center;font-size:2.4rem;margin-bottom:12px;">📧</div>
+    <h3 style="font-size:1.2rem;font-weight:700;text-align:center;margin-bottom:6px;">邮件报名</h3>
+    <p style="text-align:center;color:var(--text-secondary);font-size:.9rem;margin-bottom:24px;">请发送邮件至以下地址，按格式填写报名信息</p>
+
+    <ul style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;">
+      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">收件人</span>
+        <span><a href="mailto:hackathon@chancetop.com" style="color:var(--orange);text-decoration:none;">hackathon@chancetop.com</a></span>
+      </li>
+      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">邮件标题</span>
+        <span style="font-size:.85rem;color:var(--text-secondary)">黑客松报名 - [您的姓名]</span>
+      </li>
+    </ul>
+
+    <p style="font-weight:600;font-size:.9rem;margin-bottom:12px;">邮件正文请填写以下信息：</p>
+    <ul style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;">
+      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">姓名</span>
+        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填</span>
+      </li>
+      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">手机号</span>
+        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填</span>
+      </li>
+      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">邮箱</span>
+        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填</span>
+      </li>
+      <li style="list-style:none;padding:8px 0;border-bottom:1px solid #f0ece8;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">团队名称</span>
+        <span style="font-size:.75rem;color:var(--text-muted)">选填</span>
+      </li>
+      <li style="list-style:none;padding:8px 0;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600;color:var(--text-primary)">角色</span>
+        <span style="font-size:.75rem;color:var(--orange);font-weight:600">必填（开发者/设计师/产品经理/其他）</span>
+      </li>
+    </ul>
+
+    <div style="text-align:center;margin-bottom:16px;">
+      <a href="mailto:hackathon@chancetop.com?subject=黑客松报名&body=姓名：%0A手机号：%0A邮箱：%0A团队名称（选填）：%0A角色：%0A%0A——请填写以上信息，谢谢！" class="btn btn-lg" target="_blank">
+        打开邮箱发送
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
     </div>
-    <p style="text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:12px;">腾讯问卷 · 提交后您将收到确认邮件</p>
+    <p style="text-align:center;font-size:.8rem;color:var(--text-muted);line-height:1.6;">
+      发送后主办方将通过邮件确认报名成功。<br>
+      如有问题请联系 <a href="mailto:hackathon@chancetop.com" style="color:var(--orange);font-weight:500;text-decoration:none;">hackathon@chancetop.com</a>
+    </p>
   </div>
 </div>
 
@@ -837,44 +866,18 @@ footer .copyright{font-size:.78rem;color:var(--text-muted)}
     revealEls.forEach(function(el){ el.classList.add('visible'); });
   }
 
-  /* Registration modal */
-  var formUrl = '#'; // TODO: replace with actual form URL by AE
+  /* Registration modal (email) */
   var modalOverlay = document.getElementById('modalOverlay');
   var openBtn = document.getElementById('openModalBtn');
   var closeBtn = document.getElementById('modalCloseBtn');
-  var formIframe = document.getElementById('formIframe');
-  var modalLoading = document.getElementById('modalLoading');
-  var modalError = document.getElementById('modalError');
-  var fallbackLink = document.getElementById('modalFallbackLink');
 
   function openModal(){
     modalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    if(formUrl && formUrl !== '#'){
-      formIframe.src = formUrl;
-      formIframe.onload = function(){
-        modalLoading.style.display = 'none';
-      };
-      setTimeout(function(){
-        if(modalLoading.style.display !== 'none'){
-          modalLoading.style.display = 'none';
-          modalError.classList.add('show');
-          fallbackLink.href = formUrl;
-        }
-      }, 10000);
-    } else {
-      modalLoading.style.display = 'none';
-      modalError.classList.add('show');
-      fallbackLink.href = 'mailto:hackathon@chancetop.com';
-      fallbackLink.textContent = '联系主办方 hackathon@chancetop.com';
-    }
   }
   function closeModal(){
     modalOverlay.classList.remove('open');
     document.body.style.overflow = '';
-    setTimeout(function(){ formIframe.src = 'about:blank'; }, 300);
-    modalLoading.style.display = 'flex';
-    modalError.classList.remove('show');
   }
   if(openBtn && modalOverlay){
     openBtn.addEventListener('click', openModal);
