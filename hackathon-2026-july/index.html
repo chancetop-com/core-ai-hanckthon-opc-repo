@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChanceTop 2026 内部黑客松 | 创新 · 协作 · 未来</title>
+<meta name="description" content="ChanceTop 2026 内部黑客松 — 面向全体内部员工。2026.07.16 - 07.18，内部创新大赛。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ========== Reset & Variables ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#E2592A;
+  --orange-light:#f57c4a;
+  --orange-dark:#c44e24;
+  --orange-bg:rgba(226,89,42,.06);
+  --orange-border:rgba(226,89,42,.2);
+  --text-primary:#181616;
+  --text-secondary:#555;
+  --text-muted:#888;
+  --bg:#FFFFFF;
+  --bg-alt:#f9f6f4;
+  --bg-card:#fff;
+  --border:#e5e0dc;
+  --radius:8px;
+  --radius-lg:12px;
+  --font-sans:'Inter','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+  --space-xs:8px;
+  --space-sm:16px;
+  --space-md:24px;
+  --space-lg:48px;
+  --space-xl:80px;
+  --space-xl-mobile:48px;
+  --nav-h:64px;
+  --max-w:1100px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 20px)}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text-primary);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--orange);color:#fff}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%}
+
+/* ========== Utilities ========== */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+.section{padding:var(--space-xl) 0}
+.section-alt{background:var(--bg-alt)}
+.section-title{
+  font-size:clamp(1.5rem,3vw,2.25rem);
+  font-weight:800;
+  text-align:center;
+  margin-bottom:8px;
+  color:var(--text-primary);
+}
+.section-subtitle{
+  text-align:center;
+  color:var(--text-secondary);
+  font-size:1.05rem;
+  margin-bottom:var(--space-lg);
+}
+.section-divider{
+  width:60px;height:3px;
+  background:var(--orange);
+  margin:0 auto var(--space-lg);
+  border-radius:2px;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;
+  font-size:1rem;font-weight:600;
+  font-family:var(--font-sans);
+  color:#fff;
+  background:var(--orange);
+  border:2px solid var(--orange);
+  border-radius:var(--radius);
+  cursor:pointer;text-decoration:none;
+  transition:all .2s;
+}
+.btn:hover{background:var(--orange-dark);border-color:var(--orange-dark);transform:translateY(-1px);text-decoration:none}
+.btn:active{transform:translateY(0)}
+.btn-outline{
+  background:transparent;color:var(--orange);
+}
+.btn-outline:hover{background:var(--orange-bg)}
+.btn-lg{padding:16px 40px;font-size:1.05rem}
+.btn-sm{padding:10px 20px;font-size:.85rem}
+
+/* ========== Internal Badge ========== */
+.internal-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 14px;
+  font-size:.75rem;font-weight:600;
+  background:var(--orange-bg);
+  border:1.5px solid var(--orange-border);
+  border-radius:20px;
+  color:var(--orange);
+  margin-bottom:16px;
+}
+
+/* ========== Nav ========== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--nav-h);
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+nav .container{
+  display:flex;align-items:center;justify-content:space-between;
+  height:100%;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  color:var(--text-primary);text-decoration:none;font-weight:700;
+}
+.nav-logo svg{height:28px;width:auto;display:block}
+.nav-logo span{font-size:1.05rem;letter-spacing:.03em}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center}
+.nav-links a{
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.875rem;font-weight:500;
+  transition:color .2s;position:relative;
+  white-space:nowrap;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--orange);transition:width .25s;
+}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  padding:8px 18px;font-size:.85rem;
+  border-radius:var(--radius);
+  background:var(--orange);color:#fff !important;font-weight:600;
+  border:none;cursor:pointer;transition:background .2s;
+}
+.nav-cta:hover{background:var(--orange-dark) !important}
+.nav-cta::after{display:none !important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);border-radius:2px;transition:.3s}
+
+/* ========== Hero ========== */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:var(--nav-h) 24px var(--space-lg);
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, var(--orange-bg) 0%, #fff 50%, var(--orange-bg) 100%);
+}
+.hero-accent{
+  position:absolute;pointer-events:none;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(226,89,42,.06) 0%,transparent 70%);
+  top:-200px;right:-200px;
+}
+.hero-accent-2{
+  position:absolute;pointer-events:none;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(226,89,42,.04) 0%,transparent 70%);
+  bottom:-150px;left:-150px;
+}
+.hero-content{position:relative;z-index:1;max-width:780px}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.6rem);
+  font-weight:800;
+  line-height:1.15;
+  margin-bottom:12px;
+  color:var(--text-primary);
+}
+.hero h1 .highlight{color:var(--orange)}
+.hero-tagline{
+  font-size:clamp(1.1rem,2vw,1.4rem);
+  color:var(--text-secondary);
+  margin-bottom:16px;
+  font-weight:500;
+}
+.hero-date{
+  font-size:clamp(1rem,2vw,1.2rem);
+  color:var(--text-secondary);
+  margin-bottom:8px;
+  font-weight:600;
+}
+.hero-venue{
+  font-size:.9rem;
+  color:var(--text-muted);
+  margin-bottom:32px;
+}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero-scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--text-muted);font-size:.75rem;
+  animation:bounce 2s infinite;z-index:1;
+}
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
+
+/* ========== About ========== */
+.about-content{
+  max-width:720px;margin:0 auto;
+  text-align:center;
+}
+.about-content p{
+  font-size:1.05rem;
+  color:var(--text-secondary);
+  line-height:1.8;
+  margin-bottom:16px;
+}
+.about-highlights{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  margin-top:40px;
+}
+.about-highlight-card{
+  text-align:center;
+  padding:32px 20px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition:transform .3s,box-shadow .3s;
+}
+.about-highlight-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.about-highlight-icon{font-size:2.4rem;margin-bottom:12px;display:block}
+.about-highlight-card h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.about-highlight-card p{font-size:.85rem;color:var(--text-secondary)}
+
+/* ========== Schedule ========== */
+.schedule-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:24px;
+  max-width:900px;margin:0 auto;
+}
+.schedule-day{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:24px;
+}
+.schedule-day h3{
+  font-size:1.05rem;font-weight:700;
+  color:var(--orange);
+  margin-bottom:4px;
+}
+.schedule-day .day-date{
+  font-size:.82rem;
+  color:var(--text-muted);
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--orange-border);
+}
+.schedule-event{
+  display:flex;gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid #f0ece8;
+}
+.schedule-event:last-child{border-bottom:none}
+.schedule-time{
+  font-size:.82rem;font-weight:600;
+  color:var(--orange);
+  min-width:60px;
+  flex-shrink:0;
+}
+.schedule-desc{font-size:.88rem;color:var(--text-secondary);line-height:1.5}
+.schedule-event.highlight .schedule-time{font-weight:700}
+.schedule-event.highlight{background:var(--orange-bg);margin:0 -12px;padding:10px 12px;border-radius:6px}
+
+/* ========== Prizes ========== */
+.prize-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+  max-width:800px;margin:0 auto;
+}
+.prize-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:32px 24px;
+  text-align:center;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  position:relative;
+}
+.prize-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.prize-card.gold{
+  border:2px solid var(--orange);
+  box-shadow:0 0 0 1px var(--orange-border);
+  background:linear-gradient(135deg,#fff,var(--orange-bg));
+}
+.prize-card.gold:hover{border-color:var(--orange-dark);box-shadow:0 0 0 2px var(--orange-border),0 8px 24px rgba(226,89,42,.1)}
+.prize-icon{font-size:2.4rem;margin-bottom:10px;display:block}
+.prize-name{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.prize-desc{font-size:.85rem;color:var(--text-secondary);line-height:1.5}
+
+/* ========== Judges ========== */
+.judges-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  max-width:800px;margin:0 auto;
+}
+.judge-card{
+  text-align:center;
+  padding:32px 20px 28px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition:transform .3s,box-shadow .3s;
+}
+.judge-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.judge-avatar{
+  width:80px;height:80px;
+  border-radius:50%;
+  background:var(--orange-bg);
+  border:2px solid var(--orange-border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+  font-size:2rem;
+}
+.judge-name{
+  font-size:1.05rem;font-weight:700;margin-bottom:2px;
+}
+.judge-title{
+  font-size:.82rem;color:var(--text-muted);margin-bottom:8px;
+}
+.judge-bio{
+  font-size:.85rem;color:var(--text-secondary);line-height:1.5;
+}
+
+/* ========== FAQ ========== */
+.faq-list{max-width:680px;margin:0 auto}
+details.faq-item{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:12px;
+  overflow:hidden;
+  transition:border-color .3s;
+}
+details.faq-item[open]{border-color:var(--orange-border)}
+details.faq-item summary{
+  padding:16px 20px;
+  font-weight:600;
+  font-size:.95rem;
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:color .2s;
+  user-select:none;
+}
+details.faq-item summary::-webkit-details-marker{display:none}
+details.faq-item summary::after{
+  content:'+';
+  font-size:1.2rem;
+  color:var(--orange);
+  transition:transform .3s;
+  flex-shrink:0;
+  margin-left:12px;
+}
+details.faq-item[open] summary::after{
+  content:'−';
+}
+details.faq-item summary:hover{color:var(--orange)}
+details.faq-item .faq-answer{
+  padding:0 20px 16px;
+  font-size:.9rem;
+  color:var(--text-secondary);
+  line-height:1.7;
+}
+
+/* ========== Registration ========== */
+.registration{text-align:center}
+.reg-wrap{
+  max-width:640px;margin:0 auto;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px 32px;
+}
+.reg-wrap h3{font-size:1.3rem;font-weight:700;margin-bottom:8px}
+.reg-wrap .reg-desc{color:var(--text-secondary);font-size:.9rem;margin-bottom:24px}
+.feishu-form-wrap{
+  width:100%;
+  min-height:420px;
+  border:2px dashed var(--border);
+  border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;
+  padding:40px 20px;
+  transition:border-color .3s;
+  position:relative;
+}
+.feishu-form-wrap.loaded{
+  border-style:solid;
+  border-color:transparent;
+  padding:0;
+  min-height:auto;
+}
+.feishu-form-wrap iframe{
+  width:100%;
+  border:none;
+  display:none;
+}
+.feishu-form-wrap.loaded iframe{
+  display:block;
+  min-height:480px;
+}
+.feishu-form-placeholder{
+  text-align:center;
+}
+.feishu-form-placeholder .placeholder-icon{font-size:2.4rem;display:block;margin-bottom:8px}
+.feishu-form-placeholder p{font-size:.9rem;color:var(--text-secondary);margin-bottom:4px}
+.feishu-form-placeholder .placeholder-note{font-size:.78rem;color:var(--text-muted)}
+.feishu-form-error{
+  display:none;
+  text-align:center;
+  padding:24px;
+}
+.feishu-form-error.show{display:block}
+.feishu-form-error .error-icon{font-size:2.4rem;display:block;margin-bottom:8px}
+.feishu-form-error p{font-size:.9rem;color:var(--text-secondary);margin-bottom:12px}
+.reg-note{margin-top:16px;font-size:.8rem;color:var(--text-muted)}
+
+/* ========== Footer ========== */
+footer{
+  border-top:1px solid var(--border);
+  padding:40px 0 28px;
+  text-align:center;
+  background:var(--bg-alt);
+}
+footer .footer-brand{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:8px;
+}
+footer .footer-brand svg{height:24px;width:auto}
+footer .footer-brand span{font-size:1rem;font-weight:700;color:var(--text-primary)}
+footer p{font-size:.85rem;color:var(--text-secondary);margin-bottom:4px}
+footer .footer-links{
+  display:flex;justify-content:center;gap:24px;
+  margin:16px 0 12px;list-style:none;
+}
+footer .footer-links a{
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.85rem;transition:color .2s;
+}
+footer .footer-links a:hover{color:var(--orange)}
+footer .copyright{font-size:.78rem;color:var(--text-muted)}
+
+/* ========== Scroll Reveal ========== */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ========== Responsive ========== */
+@media(max-width:1024px){
+  .schedule-grid{gap:16px}
+}
+@media(max-width:768px){
+  .section{padding:var(--space-xl-mobile) 0}
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;
+    flex-direction:column;gap:0;
+    background:rgba(255,255,255,.98);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    padding:12px 24px 16px;
+    display:none;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0;border-bottom:1px solid #f0ece8;font-size:1rem}
+  .nav-links a:last-child{border-bottom:none}
+  .nav-links .nav-cta{margin-top:12px;text-align:center}
+  .nav-toggle{display:flex}
+  .schedule-grid{grid-template-columns:1fr}
+  .prize-grid{grid-template-columns:1fr}
+  .judges-grid{grid-template-columns:repeat(2,1fr)}
+  .reg-wrap{padding:28px 20px}
+  .hero-actions{flex-direction:column;align-items:center}
+  .about-highlights{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .hero{padding-top:calc(var(--nav-h) + 40px)}
+  .btn,.btn-lg{width:100%;justify-content:center}
+  .schedule-day{padding:20px}
+  .judges-grid{grid-template-columns:1fr}
+  .about-highlights{grid-template-columns:1fr}
+}
+@media(max-width:360px){
+  .container{padding:0 16px}
+  .section-title{font-size:1.3rem}
+  .hero h1{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Nav ==================== -->
+<nav>
+  <div class="container">
+    <a href="#home" class="nav-logo">
+      <svg width="105" height="27" viewBox="0 0 105 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_nav)">
+          <path d="M25.3469 7.40735L26.8571 8.50101C27.9703 9.30767 28.4374 10.7348 28.0092 12.0379L24.8097 21.8498H14.2147L12.9225 17.894H21.8437H21.9216L25.3469 7.40735ZM19.664 8.18299L16.8849 16.7073H21.0653L24.3348 6.6705L15.9507 0.604999C14.8375 -0.201666 13.3273 -0.201666 12.2141 0.604999L10.7038 1.69865L19.664 8.18299ZM23.8444 24.8127L24.4205 23.0442H13.3506L13.2961 22.8736L10.5715 14.52L7.19295 16.9632L10.4625 27H20.8239C22.2018 27 23.424 26.1158 23.8444 24.8127ZM5.7917 16.5056L5.83062 16.4823L13.0704 11.239L9.69183 8.79575L1.12088 15.0009L4.32039 24.8127C4.74855 26.1158 5.96296 27 7.34086 27H9.20918L7.91692 23.0442L5.7917 16.5056ZM9.69183 7.32203L16.9705 12.5886L18.2628 8.63286L9.69183 2.42775L1.30772 8.50101C0.194504 9.30767 -0.272578 10.7348 0.15558 12.0379L0.731648 13.8064L9.69183 7.32203Z" fill="#E2592A"/>
+          <path d="M35.4904 21.7803C36.2767 21.7803 36.736 22.0983 36.9384 22.6878C36.9851 22.8196 36.9539 22.8817 36.8294 22.9282L36.5335 23.0291C36.409 23.0678 36.3545 23.0523 36.3078 22.9127C36.191 22.5792 35.9341 22.4163 35.4904 22.4163C34.9377 22.4163 34.6341 22.6878 34.6341 23.1919V24.3942C34.6341 24.8906 34.9377 25.1698 35.4904 25.1698C35.9419 25.1698 36.191 24.9992 36.3078 24.6657C36.3623 24.526 36.4168 24.5028 36.5413 24.5493L36.8294 24.6501C36.9539 24.6967 36.9928 24.7587 36.9461 24.8906C36.7437 25.4801 36.2767 25.8058 35.4904 25.8058C34.5095 25.8058 33.9646 25.2629 33.9646 24.3864V23.1919C33.9646 22.3232 34.5095 21.7803 35.4904 21.7803Z" fill="#181616"/>
+          <path d="M38.1528 21.8655V22.8971C38.1995 22.8738 38.4797 22.8195 38.7911 22.8195C39.554 22.8195 39.8965 23.2228 39.8965 23.9132V25.5497C39.8965 25.6739 39.8576 25.7204 39.7331 25.7204H39.445C39.3205 25.7204 39.2816 25.6739 39.2816 25.5497V23.9287C39.2816 23.5796 39.0792 23.3935 38.6977 23.3935C38.433 23.3935 38.1995 23.4478 38.145 23.4788V25.5497C38.145 25.6739 38.1061 25.7204 37.9815 25.7204H37.6857C37.5611 25.7204 37.5222 25.6739 37.5222 25.5497V21.8655C37.5222 21.7414 37.5611 21.6948 37.6857 21.6948H37.9815C38.1139 21.7026 38.1528 21.7414 38.1528 21.8655Z" fill="#181616"/>
+          <path d="M41.6559 22.8271C42.5278 22.8271 42.8002 23.308 42.8002 23.9441V25.3557C42.8002 25.5496 42.7613 25.6039 42.6056 25.666C42.411 25.7513 42.084 25.8056 41.6481 25.8056C40.7061 25.8056 40.457 25.4876 40.457 24.9214C40.457 24.2698 40.8151 24.0449 41.6714 24.0449C41.8816 24.0449 42.0918 24.0682 42.1852 24.0682V23.913C42.1852 23.5718 42.0529 23.3779 41.6481 23.3779C41.3834 23.3779 41.1966 23.4632 41.0876 23.6416C41.0097 23.7579 40.9786 23.7734 40.8618 23.7269L40.6516 23.6338C40.5349 23.5795 40.496 23.5175 40.5582 23.3856C40.7373 23.0366 41.1032 22.8271 41.6559 22.8271ZM41.5936 24.5646C41.1888 24.5646 41.0798 24.6964 41.0798 24.9214C41.0798 25.1463 41.1654 25.2859 41.578 25.2859C41.8505 25.2859 42.014 25.2627 42.1074 25.2394C42.1463 25.2239 42.1697 25.2161 42.1697 25.1618V24.5878C42.0685 24.5878 41.8038 24.5646 41.5936 24.5646Z" fill="#181616"/>
+          <path d="M44.7231 22.8271C45.4782 22.8271 45.8285 23.2305 45.8285 23.9208V25.5574C45.8285 25.6815 45.7896 25.728 45.6651 25.728H45.3692C45.2447 25.728 45.2058 25.6815 45.2058 25.5574V23.9363C45.2058 23.5795 45.0111 23.4011 44.6219 23.4011C44.4117 23.4011 44.2482 23.4321 44.1081 23.4709C44.0848 23.4787 44.0692 23.502 44.0692 23.5252V25.5496C44.0692 25.6737 44.0303 25.7203 43.9057 25.7203H43.6099C43.4853 25.7203 43.4464 25.6737 43.4464 25.5496V23.3158C43.4464 23.1452 43.4853 23.0754 43.6566 23.0055C43.8824 22.9202 44.2093 22.8271 44.7231 22.8271Z" fill="#181616"/>
+          <path d="M47.6423 22.8271C48.0705 22.8271 48.4208 22.9125 48.6076 22.9978C48.7789 23.0831 48.8022 23.1219 48.8022 23.3003V25.8211C48.8022 26.5347 48.4675 27.0078 47.6267 27.0078C47.0507 27.0078 46.7081 26.8062 46.5213 26.4882C46.4435 26.3718 46.459 26.2787 46.5836 26.2167L46.786 26.1003C46.9105 26.0383 46.9728 26.0538 47.0584 26.1624C47.1674 26.3408 47.3231 26.4416 47.6112 26.4416C47.9848 26.4416 48.1794 26.24 48.1794 25.8521V25.5807C48.016 25.6272 47.798 25.6815 47.5411 25.6815C46.7782 25.6815 46.4357 25.2704 46.4357 24.5878V23.9673C46.4357 23.2305 46.8249 22.8271 47.6423 22.8271ZM47.689 23.4011C47.2608 23.4011 47.0584 23.5873 47.0584 23.9906V24.5646C47.0584 24.9059 47.2608 25.0998 47.6423 25.0998C47.8681 25.0998 48.0549 25.0532 48.195 25.0222V23.5252C48.195 23.4864 48.1872 23.4787 48.1483 23.4632C48.0237 23.4321 47.8603 23.4011 47.689 23.4011Z" fill="#181616"/>
+          <path d="M50.4059 22.4163V22.905H51.0131C51.1377 22.905 51.1766 22.9437 51.1766 23.0678V23.316C51.1766 23.4401 51.1377 23.4867 51.0131 23.4867H50.4059V24.5803C50.4059 25.1155 50.5616 25.2086 51.0053 25.2086C51.1299 25.2086 51.1766 25.2474 51.1766 25.3792V25.6274C51.1766 25.7593 51.1377 25.7981 51.0053 25.7981C50.1257 25.8214 49.7831 25.5421 49.7831 24.6036V23.4867H49.4173C49.2927 23.4867 49.2538 23.4401 49.2538 23.316V23.0678C49.2538 22.9437 49.2927 22.905 49.4173 22.905H49.7831V22.4163C49.7831 22.2922 49.8221 22.2534 49.9466 22.2534H50.2347C50.367 22.2534 50.4059 22.2922 50.4059 22.4163Z" fill="#181616"/>
+          <path d="M54.0414 23.0677V25.3093C54.0414 25.4799 54.0024 25.542 53.8312 25.6118C53.621 25.6971 53.294 25.8057 52.788 25.8057C52.0251 25.8057 51.6748 25.3946 51.6748 24.712V23.0677C51.6748 22.9436 51.7137 22.9048 51.8383 22.9048H52.1341C52.2587 22.9048 52.2976 22.9436 52.2976 23.0677V24.6888C52.2976 25.0533 52.4922 25.2239 52.8814 25.2239C53.0916 25.2239 53.2317 25.2007 53.3719 25.1619C53.4186 25.1464 53.4341 25.1154 53.4341 25.0688V23.0677C53.4341 22.9436 53.4731 22.9048 53.5976 22.9048H53.8857C54.0024 22.9048 54.0414 22.9436 54.0414 23.0677Z" fill="#181616"/>
+        </g>
+        <defs><clipPath id="clip0_nav"><rect width="105" height="27" fill="white"/></clipPath></defs>
+      </svg>
+      <span>ChanceTop</span>
+    </a>
+    <button class="nav-toggle" aria-label="菜单" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about" onclick="closeNav()">活动介绍</a></li>
+      <li><a href="#schedule" onclick="closeNav()">日程</a></li>
+      <li><a href="#prizes" onclick="closeNav()">奖项</a></li>
+      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
+      <li><a href="#register" class="nav-cta" onclick="closeNav()">立即报名</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== Hero ==================== -->
+<section class="hero" id="home">
+  <div class="hero-accent"></div>
+  <div class="hero-accent-2"></div>
+  <div class="hero-content">
+    <div class="internal-badge">🔒 内部活动 · 仅限 ChanceTop 员工</div>
+    <h1>ChanceTop <span class="highlight">2026</span><br>内部黑客松</h1>
+    <p class="hero-tagline">48 小时 · 用代码碰撞创意 · 让 innovation 发生</p>
+    <p class="hero-date">📅 2026.07.16 (四) 09:00 — 07.18 (六) 17:00</p>
+    <p class="hero-venue">📍 厦门总部 · 3F 创新空间</p>
+    <div class="hero-actions">
+      <a href="#register" class="btn btn-lg">立即报名</a>
+      <a href="#about" class="btn btn-lg btn-outline">了解详情</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>向下滚动</span>
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 0v20M1 13l7 7 7-7" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- ==================== About ==================== -->
+<section class="section" id="about">
+  <div class="container">
+    <h2 class="section-title reveal">关于这场黑客松</h2>
+    <div class="section-divider reveal"></div>
+    <div class="about-content reveal">
+      <p>
+        <strong>这不是一场比赛，是一次全员的创新 Offsite。</strong>
+      </p>
+      <p>
+        放下手上的日常工作，用 48 小时组队打造一个能解决实际问题的产品原型。
+        无论你是工程师、产品、设计还是运营——只要你有想法，这里就有你的位置。
+      </p>
+      <p>
+        本届主题将在开幕时揭晓。你可以提前思考：<em>"有什么事情，如果能用技术手段做得更好，会让 ChanceTop 变得不一样？"</em>
+      </p>
+    </div>
+    <div class="about-highlights reveal">
+      <div class="about-highlight-card">
+        <span class="about-highlight-icon">👥</span>
+        <h3>跨部门组队</h3>
+        <p>打破部门墙，和平时不常合作的同事一起 coding</p>
+      </div>
+      <div class="about-highlight-card">
+        <span class="about-highlight-icon">⚡</span>
+        <h3>48 小时冲刺</h3>
+        <p>从 idea 到可演示原型，极限输出</p>
+      </div>
+      <div class="about-highlight-card">
+        <span class="about-highlight-icon">🏆</span>
+        <h3>丰厚奖励</h3>
+        <p>多维度奖项，人人有机会</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Schedule ==================== -->
+<section class="section section-alt" id="schedule">
+  <div class="container">
+    <h2 class="section-title reveal">活动日程</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">三天两夜，从 0 到 1</p>
+    <div class="schedule-grid reveal">
+      <!-- Day 1 -->
+      <div class="schedule-day">
+        <h3>Day 1</h3>
+        <p class="day-date">7月16日（周四）</p>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">09:00</span>
+          <span class="schedule-desc">🔑 开幕 &amp; 主题揭晓</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">10:00</span>
+          <span class="schedule-desc">🤝 组队 &amp; 头脑风暴</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">12:00</span>
+          <span class="schedule-desc">🍕 午餐</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">14:00</span>
+          <span class="schedule-desc">💻 正式开发开始</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">18:00</span>
+          <span class="schedule-desc">🌙 自由开发 · 随时支援</span>
+        </div>
+      </div>
+      <!-- Day 2 -->
+      <div class="schedule-day">
+        <h3>Day 2</h3>
+        <p class="day-date">7月17日（周五）</p>
+        <div class="schedule-event">
+          <span class="schedule-time">09:00</span>
+          <span class="schedule-desc">💻 开发继续 · 导师巡场</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">12:00</span>
+          <span class="schedule-desc">🍕 午餐</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">16:00</span>
+          <span class="schedule-desc">📊 进度检查点 · 预演示准备</span>
+        </div>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">20:00</span>
+          <span class="schedule-desc">📝 代码提交截止（Day 2）</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">21:00</span>
+          <span class="schedule-desc">🌙 自由优化 · 赛前准备</span>
+        </div>
+      </div>
+      <!-- Day 3 -->
+      <div class="schedule-day">
+        <h3>Day 3</h3>
+        <p class="day-date">7月18日（周六）</p>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">09:00</span>
+          <span class="schedule-desc">🛑 开发截止 · 提交最终版本</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">10:00</span>
+          <span class="schedule-desc">🎤 项目演示 &amp; 评审</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">14:00</span>
+          <span class="schedule-desc">📋 评审合议</span>
+        </div>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">16:00</span>
+          <span class="schedule-desc">🏆 颁奖典礼 &amp; 闭幕</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">17:00</span>
+          <span class="schedule-desc">🍻 庆祝 &amp; 自由交流</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Prizes ==================== -->
+<section class="section" id="prizes">
+  <div class="container">
+    <h2 class="section-title reveal">奖项设置</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">多维度评选，让每一份努力都被看见</p>
+    <div class="prize-grid reveal">
+      <div class="prize-card gold">
+        <span class="prize-icon">🥇</span>
+        <h3 class="prize-name">一等奖</h3>
+        <p class="prize-desc">冠军团队 · 奖品待公布</p>
+      </div>
+      <div class="prize-card">
+        <span class="prize-icon">🥈</span>
+        <h3 class="prize-name">二等奖</h3>
+        <p class="prize-desc">亚军团队 · 奖品待公布</p>
+      </div>
+      <div class="prize-card">
+        <span class="prize-icon">🥉</span>
+        <h3 class="prize-name">三等奖</h3>
+        <p class="prize-desc">季军团队 · 奖品待公布</p>
+      </div>
+      <div class="prize-card">
+        <span class="prize-icon">💡</span>
+        <h3 class="prize-name">最佳创意奖</h3>
+        <p class="prize-desc">最具创新性方案 · 奖品待公布</p>
+      </div>
+      <div class="prize-card">
+        <span class="prize-icon">❤️</span>
+        <h3 class="prize-name">最受欢迎奖</h3>
+        <p class="prize-desc">全员投票选出 · 奖品待公布</p>
+      </div>
+    </div>
+    <p class="section-subtitle" style="margin-top:24px;font-size:.9rem;color:var(--text-muted)">
+      🏅 完整奖项详情由 PM 确认后更新
+    </p>
+  </div>
+</section>
+
+<!-- ==================== Judges ==================== -->
+<section class="section section-alt" id="judges">
+  <div class="container">
+    <h2 class="section-title reveal">评审阵容</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">由公司技术委员会 &amp; 管理团队组成评审团</p>
+    <div class="judges-grid reveal">
+      <div class="judge-card">
+        <div class="judge-avatar">👤</div>
+        <h3 class="judge-name">评委待确认</h3>
+        <p class="judge-title">—</p>
+        <p class="judge-bio">评审名单由 PM 确认后更新</p>
+      </div>
+      <div class="judge-card">
+        <div class="judge-avatar">👤</div>
+        <h3 class="judge-name">评委待确认</h3>
+        <p class="judge-title">—</p>
+        <p class="judge-bio">评审名单由 PM 确认后更新</p>
+      </div>
+      <div class="judge-card">
+        <div class="judge-avatar">👤</div>
+        <h3 class="judge-name">评委待确认</h3>
+        <p class="judge-title">—</p>
+        <p class="judge-bio">评审名单由 PM 确认后更新</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-title reveal">常见问题</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">关于这场内部黑客松，你可能想了解的</p>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>谁可以参加？</summary>
+        <div class="faq-answer">
+          <strong>全体 ChanceTop 在职员工均可参加。</strong> 不限部门、不限职级、不限技术背景。产品、设计、运营、市场——只要你有想法，都欢迎组队参加。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>需要组队吗？可以个人参加吗？</summary>
+        <div class="faq-answer">
+          建议组队参加（2-5 人），鼓励跨部门组队。如果你暂时没有队伍，可以在开幕式后的组队环节现场找队友——我们会安排破冰和组队环节。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>我不会写代码，能参加吗？</summary>
+        <div class="faq-answer">
+          <strong>当然可以！</strong> 一个好的项目不仅需要开发，还需要设计、产品思路、商业判断、演示演讲。非技术背景的队员在团队中同样关键。而且——这也是学一点代码的好机会 😄
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>需要提前准备什么？</summary>
+        <div class="faq-answer">
+          带上你的笔记本电脑和充电器即可。如果你有想做的 idea，可以先记下来——但不需要提前完成任何代码。所有开发将在活动期间 48 小时内完成。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>我这两天有日常工作，怎么办？</summary>
+        <div class="faq-answer">
+          内部黑客松是得到公司支持的全员活动。建议提前协调好工作安排，尽可能全程参与。如果有不可协调的时间冲突，也可以选择部分时段参与——组队时和队友说明即可。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>项目 demo 有什么要求？</summary>
+        <div class="faq-answer">
+          每个团队有 <strong>5 分钟演示 + 3 分钟评委提问</strong>。可以展示原型、PPT、录屏或 live demo——只要能清晰表达你的 idea 和实现。重点不是代码量，而是创意完整度和解决问题的思路。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>报名后怎么知道参赛细节？</summary>
+        <div class="faq-answer">
+          报名成功后，组委会将通过飞书通知群发送赛前指引，包括赛程详情、场地指引、组队群入口等。请留意飞书消息。
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>还有问题找谁？</summary>
+        <div class="faq-answer">
+          联系本次黑客松组委会：飞书联系 <strong>PM Richard</strong>，或发邮件至 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a>。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Registration ==================== -->
+<section class="section section-alt" id="register">
+  <div class="container">
+    <h2 class="section-title reveal">准备好挑战了吗？</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">48 小时，让你的想法变成现实</p>
+    <div class="reg-wrap reveal">
+      <h3>立即报名</h3>
+      <p class="reg-desc">填写团队信息，锁定参赛席位。报名截止：<strong>7月14日（周二）18:00</strong></p>
+      <div id="feishuForm" class="feishu-form-wrap">
+        <div class="feishu-form-placeholder">
+          <span class="placeholder-icon">📋</span>
+          <p>加载飞书报名表单中...</p>
+          <p class="placeholder-note">如果表单未自动加载，请点击下方按钮在新窗口打开</p>
+        </div>
+        <div id="feishuFormError" class="feishu-form-error">
+          <span class="error-icon">⚠️</span>
+          <p>表单加载失败，请在新窗口打开</p>
+          <a id="feishuFallbackLink" href="#" target="_blank" rel="noopener" class="btn btn-sm">在新窗口打开报名表</a>
+        </div>
+        <iframe id="feishuIframe" src="" title="飞书报名表单" loading="lazy" allow="fullscreen"></iframe>
+      </div>
+      <p class="reg-note">
+        提交后你将收到飞书确认消息。如有问题请联系 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Footer ==================== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">
+      <svg width="105" height="27" viewBox="0 0 105 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_footer)">
+          <path d="M25.3469 7.40735L26.8571 8.50101C27.9703 9.30767 28.4374 10.7348 28.0092 12.0379L24.8097 21.8498H14.2147L12.9225 17.894H21.8437H21.9216L25.3469 7.40735ZM19.664 8.18299L16.8849 16.7073H21.0653L24.3348 6.6705L15.9507 0.604999C14.8375 -0.201666 13.3273 -0.201666 12.2141 0.604999L10.7038 1.69865L19.664 8.18299ZM23.8444 24.8127L24.4205 23.0442H13.3506L13.2961 22.8736L10.5715 14.52L7.19295 16.9632L10.4625 27H20.8239C22.2018 27 23.424 26.1158 23.8444 24.8127ZM5.7917 16.5056L5.83062 16.4823L13.0704 11.239L9.69183 8.79575L1.12088 15.0009L4.32039 24.8127C4.74855 26.1158 5.96296 27 7.34086 27H9.20918L7.91692 23.0442L5.7917 16.5056ZM9.69183 7.32203L16.9705 12.5886L18.2628 8.63286L9.69183 2.42775L1.30772 8.50101C0.194504 9.30767 -0.272578 10.7348 0.15558 12.0379L0.731648 13.8064L9.69183 7.32203Z" fill="#E2592A"/>
+        </g>
+        <defs><clipPath id="clip0_footer"><rect width="105" height="27" fill="white"/></clipPath></defs>
+      </svg>
+      <span>ChanceTop</span>
+    </div>
+    <p>厦门畅拓科技有限公司 · 2026 内部黑客松组委会</p>
+    <ul class="footer-links">
+      <li><a href="mailto:hackathon@chancetop.com">联系组委会</a></li>
+      <li><a href="https://www.chancetop.com" target="_blank" rel="noopener">公司官网</a></li>
+    </ul>
+    <p class="copyright">© 2026 ChanceTop. All rights reserved. 内部活动 · 仅限员工</p>
+  </div>
+</section>
+
+<!-- ==================== Scripts ==================== -->
+<script>
+// ========== Navigation Toggle ==========
+function toggleNav(){
+  document.querySelector('.nav-links').classList.toggle('open');
+}
+function closeNav(){
+  document.querySelector('.nav-links').classList.remove('open');
+}
+
+// ========== Scroll Reveal ==========
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+// ========== Feishu Form Embed ==========
+(function(){
+  const wrap = document.getElementById('feishuForm');
+  const iframe = document.getElementById('feishuIframe');
+  const error = document.getElementById('feishuFormError');
+  const fallbackLink = document.getElementById('feishuFallbackLink');
+
+  // ——— 配置区：PM 填入飞书表单 URL 即可生效 ———
+  const FEISHU_FORM_URL = '';  // ← PM 在此填入飞书表单链接
+  const FEISHU_FALLBACK_URL = FEISHU_FORM_URL;
+
+  if(!FEISHU_FORM_URL){
+    // 表单 URL 未配置：显示占位提示
+    return;
+  }
+
+  // 设置 iframe 和 fallback 链接
+  iframe.src = FEISHU_FORM_URL;
+  fallbackLink.href = FEISHU_FALLBACK_URL;
+
+  // iframe 加载成功
+  iframe.onload = function(){
+    wrap.classList.add('loaded');
+  };
+
+  // iframe 加载超时回退（10 秒）
+  let loaded = false;
+  iframe.onload = function(){
+    loaded = true;
+    wrap.classList.add('loaded');
+  };
+  setTimeout(function(){
+    if(!loaded){
+      error.classList.add('show');
+      // 仍然显示 iframe，但不标记为 loaded
+    }
+  }, 10000);
+})();
+</script>
+</body>
+</html>
