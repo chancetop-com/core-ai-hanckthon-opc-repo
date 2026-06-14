@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chancetop 2026 黑客松 | AI · 创新 · 未来</title>
+<meta name="description" content="Chancetop 2026 黑客松 — 以 AI 为主题，汇聚创新力量。2026.06.15 - 06.17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==================== Reset & Variables ==================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-dark:#0a0a1a;
+  --bg-card:#141428;
+  --bg-elevated:#1a1a35;
+  --cyan:#00d4ff;
+  --cyan-dim:#0099c0;
+  --violet:#7c3aed;
+  --violet-dim:#5b21b6;
+  --text-primary:#e2e8f0;
+  --text-secondary:#94a3b8;
+  --text-muted:#64748b;
+  --success:#10b981;
+  --error:#ef4444;
+  --border:#1e293b;
+  --radius:8px;
+  --radius-lg:12px;
+  --font-sans:'Inter','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+  --space-xs:8px;
+  --space-sm:16px;
+  --space-md:24px;
+  --space-lg:48px;
+  --space-xl:80px;
+  --space-xl-mobile:48px;
+  --nav-h:64px;
+  --max-w:1100px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 20px)}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg-dark);
+  color:var(--text-primary);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ==================== Utilities ==================== */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+
+.section-title{
+  font-size:clamp(1.5rem,3vw,2.25rem);
+  font-weight:700;
+  text-align:center;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.section-subtitle{
+  text-align:center;
+  color:var(--text-secondary);
+  font-size:1rem;
+  margin-bottom:48px;
+}
+
+/* ==================== Nav ==================== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--nav-h);
+  background:rgba(10,10,26,.85);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+nav .container{
+  display:flex;align-items:center;justify-content:space-between;
+  height:100%;
+}
+.nav-logo{
+  font-weight:800;font-size:1.1rem;letter-spacing:.05em;
+  color:var(--text-primary);text-decoration:none;
+}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.875rem;font-weight:500;
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--cyan);transition:width .25s;
+}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-links a:hover::after{width:100%}
+
+/* Hamburger */
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);border-radius:2px;transition:.3s}
+
+/* ==================== Hero ==================== */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  position:relative;
+  padding:var(--nav-h) 24px 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,212,255,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(124,58,237,.06) 0%, transparent 50%),
+    var(--bg-dark);
+  overflow:hidden;
+}
+/* Animated grid bg */
+.hero-grid{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;
+  z-index:0;
+}
+.hero-grid::before{
+  content:'';position:absolute;inset:-50%;
+  width:200%;height:200%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size:60px 60px;
+  animation:grid-drift 30s linear infinite;
+}
+@keyframes grid-drift{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-60px,-60px)}
+}
+.hero-content{position:relative;z-index:1;max-width:780px}
+.hero-badge{
+  display:inline-block;
+  padding:6px 18px;
+  border-radius:20px;
+  font-size:.8rem;font-weight:600;
+  color:var(--cyan);
+  border:1px solid rgba(0,212,255,.25);
+  background:rgba(0,212,255,.06);
+  margin-bottom:24px;
+  letter-spacing:.06em;
+}
+.hero h1{
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:800;
+  line-height:1.15;
+  margin-bottom:16px;
+}
+.hero h1 .highlight{
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-tagline{
+  font-size:clamp(1.1rem,2vw,1.4rem);
+  color:var(--text-secondary);
+  margin-bottom:12px;
+  font-weight:500;
+}
+.hero-date{
+  font-size:1.05rem;
+  color:var(--text-secondary);
+  margin-bottom:36px;
+  letter-spacing:.04em;
+}
+.hero-date strong{color:var(--text-primary)}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:16px 40px;
+  border-radius:var(--radius);
+  font-size:1.05rem;font-weight:600;
+  color:#fff;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 24px rgba(0,212,255,.25);
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,212,255,.35)}
+.hero-cta:active{transform:translateY(0)}
+
+.hero-scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--text-secondary);font-size:.75rem;letter-spacing:.06em;
+  animation:bounce 2s infinite;z-index:1;
+}
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
+
+/* ==================== Section Base ==================== */
+section{padding:var(--space-xl) 0}
+section:nth-child(even){background:rgba(255,255,255,.02)}
+
+/* ==================== Schedule (Timeline) ==================== */
+.timeline{position:relative;max-width:700px;margin:0 auto}
+.timeline::before{
+  content:'';position:absolute;left:32px;top:0;bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,var(--cyan),var(--violet));
+}
+.timeline-item{
+  position:relative;padding:0 0 40px 80px;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.timeline-item.visible{opacity:1;transform:translateY(0)}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{
+  position:absolute;left:24px;top:4px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--bg-dark);border:3px solid var(--cyan);
+  z-index:1;
+}
+.timeline-item:nth-child(even) .timeline-dot{border-color:var(--violet)}
+.timeline-date{
+  font-size:.85rem;font-weight:600;color:var(--cyan);
+  margin-bottom:4px;
+}
+.timeline-item:nth-child(even) .timeline-date{color:var(--violet)}
+.timeline-title{
+  font-size:1.1rem;font-weight:600;margin-bottom:4px;
+}
+.timeline-desc{
+  font-size:.9rem;color:var(--text-secondary);
+}
+
+/* ==================== Prizes ==================== */
+.prize-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
+.prize-card{
+  background:var(--bg-card);
+  border-radius:var(--radius-lg);
+  padding:36px 28px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.06);
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;
+  overflow:hidden;
+}
+.prize-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,.2);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.prize-card.gold{border-color:rgba(255,215,0,.2)}
+.prize-card.gold:hover{border-color:rgba(255,215,0,.4)}
+.prize-icon{font-size:2.8rem;margin-bottom:16px}
+.prize-name{font-size:1.15rem;font-weight:700;margin-bottom:4px}
+.prize-amount{
+  font-size:1.6rem;font-weight:800;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px;
+}
+.prize-desc{font-size:.85rem;color:var(--text-secondary)}
+
+/* ==================== Registration ==================== */
+.registration{
+  text-align:center;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,212,255,.06) 0%, transparent 60%),
+    var(--bg-dark);
+}
+.registration-card{
+  max-width:560px;margin:0 auto;
+  background:var(--bg-card);
+  border-radius:var(--radius-lg);
+  padding:48px 36px;
+  border:1px solid rgba(255,255,255,.08);
+}
+.registration-card h3{
+  font-size:1.3rem;font-weight:700;margin-bottom:8px;
+}
+.registration-card p{
+  color:var(--text-secondary);font-size:.9rem;margin-bottom:28px;
+}
+.reg-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 36px;
+  border-radius:var(--radius);
+  font-size:1rem;font-weight:600;
+  color:#fff;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  border:none;cursor:pointer;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,212,255,.2);
+}
+.reg-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,.3)}
+.reg-note{
+  margin-top:16px;font-size:.8rem;color:var(--text-secondary);
+}
+
+/* ==================== Registration Modal ==================== */
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.7);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s,visibility .3s;
+}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal-content{
+  background:var(--bg-card);
+  border-radius:var(--radius-lg);
+  width:100%;max-width:640px;
+  max-height:90vh;overflow-y:auto;
+  padding:32px;
+  position:relative;
+  border:1px solid var(--border);
+  transform:translateY(20px) scale(.97);
+  transition:transform .3s;
+}
+.modal-overlay.open .modal-content{transform:translateY(0) scale(1)}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;color:var(--text-secondary);
+  font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s;
+}
+.modal-close:hover{background:var(--bg-elevated);color:var(--text-primary)}
+.modal-title{font-size:1.15rem;font-weight:700;margin-bottom:20px;text-align:center}
+.modal-iframe-wrap{
+  position:relative;
+  width:100%;min-height:500px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--bg-elevated);
+}
+.modal-iframe-wrap iframe{
+  width:100%;height:500px;border:none;
+  display:block;
+}
+.modal-loading{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;
+  color:var(--text-secondary);
+  font-size:.9rem;
+}
+.modal-spinner{
+  width:32px;height:32px;
+  border:3px solid var(--border);
+  border-top-color:var(--cyan);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal-error{
+  display:none;
+  text-align:center;padding:40px 20px;
+}
+.modal-error.show{display:block}
+.modal-error p{color:var(--text-secondary);margin-bottom:16px}
+.modal-error a{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--cyan);text-decoration:none;font-weight:500;
+}
+.modal-error a:hover{text-decoration:underline}
+
+/* ==================== Footer ==================== */
+footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:48px 0 32px;
+  text-align:center;
+}
+footer .footer-brand{
+  font-size:1.1rem;font-weight:700;margin-bottom:8px;
+  color:var(--text-primary);
+}
+footer .footer-brand span{color:var(--cyan)}
+footer p{font-size:.85rem;color:var(--text-secondary);margin-bottom:4px}
+footer .footer-links{
+  display:flex;justify-content:center;gap:24px;
+  margin:20px 0 16px;list-style:none;
+}
+footer .footer-links a{
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.85rem;transition:color .2s;
+}
+footer .footer-links a:hover{color:var(--cyan)}
+footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
+
+/* ==================== Scroll Reveal ==================== */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ==================== Responsive ==================== */
+@media(max-width:1024px){
+  .prize-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  section{padding:var(--space-xl-mobile) 0}
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;
+    flex-direction:column;gap:0;
+    background:rgba(10,10,26,.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:16px 24px;
+    display:none;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:1rem}
+  .nav-links a:last-child{border-bottom:none}
+  .nav-toggle{display:flex}
+  .timeline::before{left:24px}
+  .timeline-item{padding-left:64px}
+  .timeline-dot{left:16px}
+  .prize-grid{grid-template-columns:1fr}
+  .registration-card{padding:36px 24px}
+  .hero h1{font-size:clamp(1.8rem,8vw,2.8rem)}
+  .modal-iframe-wrap{min-height:400px}
+  .modal-iframe-wrap iframe{height:400px}
+}
+@media(max-width:480px){
+  .hero{padding-top:calc(var(--nav-h) + 40px)}
+  .hero-cta,.reg-cta{width:100%;justify-content:center}
+  .modal-content{padding:24px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Nav ==================== -->
+<nav>
+  <div class="container">
+    <a href="#" class="nav-logo">CHANCE<span>TOP</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#schedule">赛事赛程</a></li>
+      <li><a href="#prizes">奖项</a></li>
+      <li><a href="#register">报名</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== Hero ==================== -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">2026 · 年度黑客松</div>
+    <h1>
+      CHANCETOP<br>
+      <span class="highlight">2026 黑客松</span>
+    </h1>
+    <p class="hero-tagline">AI · 创新 · 未来</p>
+    <p class="hero-date"><strong>2026.06.15</strong> — <strong>2026.06.17</strong></p>
+    <a href="#register" class="hero-cta">
+      立即报名
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>向下滚动了解更多</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+  </div>
+</section>
+
+<!-- ==================== Schedule ==================== -->
+<section id="schedule">
+  <div class="container">
+    <h2 class="section-title reveal">赛事赛程</h2>
+    <p class="section-subtitle reveal">为期三天的 AI 黑客松，从创意到落地</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6 月 1 日前</div>
+        <div class="timeline-title">报名截止</div>
+        <div class="timeline-desc">在线提交团队信息与项目方向简介</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6 月 15 日 · 09:00</div>
+        <div class="timeline-title">开幕式 &amp; 组队</div>
+        <div class="timeline-desc">主题演讲、赛题公布、自由组队</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6 月 15 日 — 6 月 17 日</div>
+        <div class="timeline-title">黑客松进行时</div>
+        <div class="timeline-desc">48 小时极限开发，期间安排导师指导与技术分享</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6 月 17 日 · 15:00</div>
+        <div class="timeline-title">作品提交截止 &amp; 评审</div>
+        <div class="timeline-desc">代码提交、项目演示、评委评审</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">6 月 17 日 · 19:00</div>
+        <div class="timeline-title">颁奖典礼</div>
+        <div class="timeline-desc">结果公布 &amp; 颁奖 &amp; 闭幕</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Prizes ==================== -->
+<section id="prizes">
+  <div class="container">
+    <h2 class="section-title reveal">奖项设置</h2>
+    <p class="section-subtitle reveal">丰厚奖励，等你来拿</p>
+    <div class="prize-grid">
+      <div class="prize-card gold reveal">
+        <div class="prize-icon">🥇</div>
+        <div class="prize-name">一等奖</div>
+        <div class="prize-amount">¥50,000</div>
+        <div class="prize-desc">冠军团队 · 现金奖励 + 荣誉证书 + 直通加速器机会</div>
+      </div>
+      <div class="prize-card reveal">
+        <div class="prize-icon">🥈</div>
+        <div class="prize-name">二等奖</div>
+        <div class="prize-amount">¥30,000</div>
+        <div class="prize-desc">亚军团队 · 现金奖励 + 荣誉证书</div>
+      </div>
+      <div class="prize-card reveal">
+        <div class="prize-icon">🥉</div>
+        <div class="prize-name">三等奖</div>
+        <div class="prize-amount">¥10,000</div>
+        <div class="prize-desc">季军团队 · 现金奖励 + 荣誉证书</div>
+      </div>
+      <div class="prize-card reveal">
+        <div class="prize-icon">🏆</div>
+        <div class="prize-name">最佳创新奖</div>
+        <div class="prize-amount">¥8,000</div>
+        <div class="prize-desc">最具创意项目 · 专项奖金</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Registration ==================== -->
+<section id="register" class="registration">
+  <div class="container">
+    <h2 class="section-title reveal">立即报名</h2>
+    <p class="section-subtitle reveal">用 AI 改变世界，从这次黑客松开始</p>
+    <div class="registration-card reveal">
+      <h3>加入 Chancetop 2026 黑客松</h3>
+      <p>填写报名表，组队参赛。我们将在收到报名后 3 个工作日内通过邮件确认。</p>
+      <button class="reg-cta" id="openModalBtn">
+        填写报名表
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </button>
+      <p class="reg-note">报名表链接待确认，将在上线前更新。如有任何疑问，请联系 <a href="mailto:hackathon@chancetop.com" style="color:var(--cyan);text-decoration:none;">hackathon@chancetop.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Registration Modal ==================== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <button class="modal-close" id="modalCloseBtn" aria-label="关闭">✕</button>
+    <div class="modal-title">Chancetop 2026 黑客松 · 报名表</div>
+    <div class="modal-iframe-wrap">
+      <div class="modal-loading" id="modalLoading">
+        <div class="modal-spinner"></div>
+        <span>加载报名表中…</span>
+      </div>
+      <div class="modal-error" id="modalError">
+        <p>报名表加载失败</p>
+        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener">
+          点击此处在新窗口打开报名表 →
+        </a>
+      </div>
+      <iframe id="formIframe"
+        src="about:blank"
+        title="报名表"
+        allow="fullscreen"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-popups">
+      </iframe>
+    </div>
+    <p style="text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:12px;">提交后您将收到确认邮件</p>
+  </div>
+</div>
+
+<!-- ==================== Footer ==================== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">CHANCE<span>TOP</span></div>
+    <p>厦门畅拓科技有限公司</p>
+    <p style="font-size:.8rem;color:var(--text-secondary);margin-top:4px;">Xiamen Chancetop Technology Co., Ltd.</p>
+    <ul class="footer-links">
+      <li><a href="#hero">首页</a></li>
+      <li><a href="#schedule">赛程</a></li>
+      <li><a href="#prizes">奖项</a></li>
+      <li><a href="#register">报名</a></li>
+    </ul>
+    <p class="copyright">&copy; 2026 Chancetop. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ==================== Scripts ==================== -->
+<script>
+(function(){
+  'use strict';
+
+  /* --- Mobile nav toggle --- */
+  const toggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if(toggle && navLinks){
+    toggle.addEventListener('click', function(){
+      navLinks.classList.toggle('open');
+    });
+    // Close nav on link click (mobile)
+    navLinks.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        navLinks.classList.remove('open');
+      });
+    });
+  }
+
+  /* --- Scroll reveal with IntersectionObserver --- */
+  const revealEls = document.querySelectorAll('.reveal, .timeline-item');
+  if(revealEls.length && 'IntersectionObserver' in window){
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  } else {
+    // Fallback: show all immediately
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  /* --- Registration modal --- */
+  var formUrl = '#'; // TODO: replace with actual form URL by AE
+  var modalOverlay = document.getElementById('modalOverlay');
+  var openBtn = document.getElementById('openModalBtn');
+  var closeBtn = document.getElementById('modalCloseBtn');
+  var formIframe = document.getElementById('formIframe');
+  var modalLoading = document.getElementById('modalLoading');
+  var modalError = document.getElementById('modalError');
+  var fallbackLink = document.getElementById('modalFallbackLink');
+
+  function openModal(){
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(formUrl && formUrl !== '#'){
+      formIframe.src = formUrl;
+      // iframe load handler
+      formIframe.onload = function(){
+        modalLoading.style.display = 'none';
+      };
+      // timeout fallback
+      setTimeout(function(){
+        if(modalLoading.style.display !== 'none'){
+          modalLoading.style.display = 'none';
+          modalError.classList.add('show');
+          fallbackLink.href = formUrl;
+        }
+      }, 10000);
+    } else {
+      modalLoading.style.display = 'none';
+      modalError.classList.add('show');
+      fallbackLink.href = 'mailto:hackathon@chancetop.com';
+      fallbackLink.textContent = '联系主办方 hackathon@chancetop.com';
+    }
+  }
+  function closeModal(){
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    // Delay iframe unload to avoid flash
+    setTimeout(function(){ formIframe.src = 'about:blank'; }, 300);
+    modalLoading.style.display = 'flex';
+    modalError.classList.remove('show');
+  }
+  if(openBtn && modalOverlay){
+    openBtn.addEventListener('click', openModal);
+    if(closeBtn) closeBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', function(e){
+      if(e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
