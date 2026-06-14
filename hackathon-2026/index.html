@@ -3,32 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chancetop 2026 黑客松 | AI · 创新 · 未来</title>
-<meta name="description" content="Chancetop 2026 黑客松 — 以 AI 为主题，汇聚创新力量。2026.06.16 - 06.17，总奖池 50 万。">
+<title>Chance Top 2026 黑客松 | AI · 创新 · 未来</title>
+<meta name="description" content="Chance Top 2026 黑客松 — 以 AI 为主题，汇聚创新力量。2026.06.16 - 06.17，总奖池 ¥500,000。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ==================== Reset & Variables ==================== */
+/* ========== Reset & Variables ========== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg-dark:#0a0a1a;
-  --bg-card:#141428;
-  --bg-elevated:#1a1a35;
-  --cyan:#00d4ff;
-  --cyan-dim:#0099c0;
-  --violet:#7c3aed;
-  --violet-dim:#5b21b6;
-  --text-primary:#e2e8f0;
-  --text-secondary:#94a3b8;
-  --text-muted:#64748b;
-  --success:#10b981;
-  --error:#ef4444;
-  --border:#1e293b;
+  --orange:#E2592A;
+  --orange-light:#f57c4a;
+  --orange-dark:#c44e24;
+  --orange-bg:rgba(226,89,42,.06);
+  --orange-border:rgba(226,89,42,.2);
+  --text-primary:#181616;
+  --text-secondary:#555;
+  --text-muted:#888;
+  --bg:#FFFFFF;
+  --bg-alt:#f9f6f4;
+  --bg-card:#fff;
+  --border:#e5e0dc;
   --radius:8px;
   --radius-lg:12px;
   --font-sans:'Inter','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
-  --font-pixel:'Press Start 2P',monospace;
   --space-xs:8px;
   --space-sm:16px;
   --space-md:24px;
@@ -41,225 +39,167 @@
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 20px)}
 body{
   font-family:var(--font-sans);
-  background:var(--bg-dark);
+  background:var(--bg);
   color:var(--text-primary);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
 }
+::selection{background:var(--orange);color:#fff}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%}
 
-/* ==================== Utilities ==================== */
+/* ========== Utilities ========== */
 .container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
-
+.section{padding:var(--space-xl) 0}
+.section-alt{background:var(--bg-alt)}
 .section-title{
   font-size:clamp(1.5rem,3vw,2.25rem);
-  font-weight:700;
+  font-weight:800;
   text-align:center;
-  margin-bottom:12px;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  margin-bottom:8px;
+  color:var(--text-primary);
 }
 .section-subtitle{
   text-align:center;
   color:var(--text-secondary);
-  font-size:1rem;
-  margin-bottom:48px;
+  font-size:1.05rem;
+  margin-bottom:var(--space-lg);
 }
-
-/* ==================== Pixel Style Utilities ==================== */
-.pixel-font{font-family:var(--font-pixel);letter-spacing:.02em}
-.pixel-divider{
-  width:80px;height:4px;margin:0 auto var(--space-lg);
-  background:repeating-linear-gradient(90deg,var(--cyan) 0px,var(--cyan) 4px,transparent 4px,transparent 8px);
+.section-divider{
+  width:60px;height:3px;
+  background:var(--orange);
+  margin:0 auto var(--space-lg);
+  border-radius:2px;
 }
-.pixel-block-row{
-  display:flex;justify-content:center;gap:5px;margin-bottom:12px;
-}
-.pixel-block-row .pixel-block{
-  width:5px;height:5px;background:var(--cyan);
-  box-shadow:0 0 0 0 transparent;
-}
-.pixel-block-row .pixel-block:nth-child(2){background:var(--violet)}
-.pixel-block-row .pixel-block:nth-child(3){background:var(--cyan)}
-.pixel-star{
-  position:absolute;width:3px;height:3px;background:var(--cyan);
-  box-shadow:0 0 4px var(--cyan),0 0 8px var(--cyan);
-  animation:pixel-twinkle 3s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes pixel-twinkle{
-  0%,100%{opacity:.3}
-  50%{opacity:1}
-}
-
-/* Pixel CTA button */
-.btn-pixel{
+.btn{
   display:inline-flex;align-items:center;gap:8px;
-  padding:14px 36px;
+  padding:14px 32px;
   font-size:1rem;font-weight:600;
   font-family:var(--font-sans);
   color:#fff;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  border:2px solid var(--cyan);
-  border-radius:0;
+  background:var(--orange);
+  border:2px solid var(--orange);
+  border-radius:var(--radius);
   cursor:pointer;text-decoration:none;
-  position:relative;
-  transition:transform .2s;
-  box-shadow:
-    0 2px 8px rgba(0,212,255,.15),
-    inset 0 0 0 2px rgba(255,255,255,.1);
+  transition:all .2s;
 }
-.btn-pixel:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,212,255,.3),inset 0 0 0 2px rgba(255,255,255,.2)}
-.btn-pixel:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,212,255,.2),inset 0 0 0 3px rgba(255,255,255,.15)}
-.btn-pixel-lg{padding:16px 40px;font-size:1.05rem}
+.btn:hover{background:var(--orange-dark);border-color:var(--orange-dark);transform:translateY(-1px);text-decoration:none}
+.btn:active{transform:translateY(0)}
+.btn-outline{
+  background:transparent;color:var(--orange);
+}
+.btn-outline:hover{background:var(--orange-bg)}
+.btn-lg{padding:16px 40px;font-size:1.05rem}
 
-/* ==================== Nav ==================== */
+/* ========== Nav ========== */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   height:var(--nav-h);
-  background:rgba(10,10,26,.85);
+  background:rgba(255,255,255,.95);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid var(--border);
 }
 nav .container{
   display:flex;align-items:center;justify-content:space-between;
   height:100%;
 }
 .nav-logo{
-  font-weight:800;font-size:1.1rem;letter-spacing:.05em;
-  color:var(--text-primary);text-decoration:none;
+  display:flex;align-items:center;gap:10px;
+  color:var(--text-primary);text-decoration:none;font-weight:700;
 }
-.nav-logo span{color:var(--cyan)}
-.nav-links{display:flex;gap:32px;list-style:none}
+.nav-logo svg{height:28px;width:auto;display:block}
+.nav-logo span{font-size:1.05rem;letter-spacing:.03em}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
 .nav-links a{
   color:var(--text-secondary);text-decoration:none;
   font-size:.875rem;font-weight:500;
   transition:color .2s;position:relative;
+  white-space:nowrap;
 }
 .nav-links a::after{
   content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
-  background:var(--cyan);transition:width .25s;
+  background:var(--orange);transition:width .25s;
 }
 .nav-links a:hover{color:var(--text-primary)}
 .nav-links a:hover::after{width:100%}
-
-/* Hamburger */
+.nav-cta{
+  padding:8px 18px;font-size:.85rem;
+  border-radius:var(--radius);
+  background:var(--orange);color:#fff !important;font-weight:600;
+  border:none;cursor:pointer;transition:background .2s;
+}
+.nav-cta:hover{background:var(--orange-dark) !important}
+.nav-cta::after{display:none !important}
 .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);border-radius:2px;transition:.3s}
 
-/* ==================== Hero ==================== */
+/* ========== Hero ========== */
 .hero{
   min-height:100vh;
   display:flex;align-items:center;justify-content:center;
   text-align:center;
+  padding:var(--nav-h) 24px var(--space-lg);
   position:relative;
-  padding:var(--nav-h) 24px 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,212,255,.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(124,58,237,.06) 0%, transparent 50%),
-    var(--bg-dark);
   overflow:hidden;
+  background:
+    linear-gradient(135deg, var(--orange-bg) 0%, #fff 50%, var(--orange-bg) 100%);
 }
-/* Animated grid bg */
-.hero-grid{
-  position:absolute;inset:0;overflow:hidden;pointer-events:none;
-  z-index:0;
+.hero-accent{
+  position:absolute;pointer-events:none;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(226,89,42,.06) 0%,transparent 70%);
+  top:-200px;right:-200px;
 }
-.hero-grid::before{
-  content:'';position:absolute;inset:-50%;
-  width:200%;height:200%;
-  background-image:
-    linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
-  background-size:40px 40px;
-  animation:grid-drift 20s linear infinite;
-}
-@keyframes grid-drift{
-  0%{transform:translate(0,0)}
-  100%{transform:translate(-40px,-40px)}
-}
-/* 8-bit twinkling stars */
-@keyframes star-drift{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-}
-.hero-stars{
-  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
+.hero-accent-2{
+  position:absolute;pointer-events:none;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(226,89,42,.04) 0%,transparent 70%);
+  bottom:-150px;left:-150px;
 }
 .hero-content{position:relative;z-index:1;max-width:780px}
 .hero-badge{
   display:inline-block;
-  padding:6px 18px;
-  border-radius:0;
-  font-family:var(--font-pixel);
-  font-size:.65rem;font-weight:400;
-  color:var(--cyan);
-  border:2px solid rgba(0,212,255,.3);
-  background:rgba(0,212,255,.06);
+  padding:6px 20px;
+  font-size:.8rem;font-weight:600;
+  color:var(--orange);
+  border:1.5px solid var(--orange-border);
+  border-radius:20px;
+  background:var(--orange-bg);
   margin-bottom:20px;
   letter-spacing:.04em;
-  text-transform:uppercase;
 }
 .hero h1{
-  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-size:clamp(2.2rem,6vw,4rem);
   font-weight:800;
   line-height:1.15;
-  margin-bottom:12px;
-}
-.hero h1 .highlight{
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero-pixel-subtitle{
-  font-family:var(--font-pixel);
-  font-size:clamp(.7rem,1.5vw,1rem);
-  color:var(--cyan);
   margin-bottom:8px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  opacity:.8;
+  color:var(--text-primary);
 }
+.hero h1 .highlight{color:var(--orange)}
 .hero-tagline{
   font-size:clamp(1.1rem,2vw,1.4rem);
   color:var(--text-secondary);
-  margin-bottom:8px;
+  margin-bottom:6px;
   font-weight:500;
+}
+.hero-prize{
+  font-size:clamp(1.4rem,3vw,2rem);
+  font-weight:800;
+  color:var(--orange);
+  margin-bottom:4px;
 }
 .hero-date{
   font-size:1.05rem;
   color:var(--text-secondary);
-  margin-bottom:36px;
-  letter-spacing:.04em;
+  margin-bottom:32px;
 }
-.hero-date strong{color:var(--text-primary)}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:16px 40px;
-  font-size:1.05rem;font-weight:600;
-  font-family:var(--font-sans);
-  color:#fff;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  border:2px solid var(--cyan);
-  border-radius:0;
-  cursor:pointer;text-decoration:none;
-  position:relative;
-  transition:transform .2s;
-  box-shadow:
-    0 2px 8px rgba(0,212,255,.15),
-    inset 0 0 0 2px rgba(255,255,255,.1);
-}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,212,255,.3),inset 0 0 0 2px rgba(255,255,255,.2)}
-.hero-cta:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,212,255,.2),inset 0 0 0 3px rgba(255,255,255,.15)}
-
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .hero-scroll-hint{
   position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:var(--text-secondary);font-size:.75rem;letter-spacing:.06em;
+  color:var(--text-muted);font-size:.75rem;
   animation:bounce 2s infinite;z-index:1;
 }
 @keyframes bounce{
@@ -267,130 +207,164 @@ nav .container{
   50%{transform:translateX(-50%) translateY(8px)}
 }
 
-/* ==================== Section Base ==================== */
-section{padding:var(--space-xl) 0}
-section:nth-child(even){background:rgba(255,255,255,.02)}
+/* ========== Highlights ========== */
+.highlights-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  max-width:800px;margin:0 auto;
+}
+.highlight-card{
+  text-align:center;
+  padding:32px 20px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition:transform .3s,box-shadow .3s;
+}
+.highlight-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.highlight-icon{font-size:2.4rem;margin-bottom:12px;display:block}
+.highlight-card h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.highlight-card p{font-size:.85rem;color:var(--text-secondary)}
 
-/* ==================== Schedule (Timeline) ==================== */
-.timeline{position:relative;max-width:700px;margin:0 auto}
-.timeline::before{
-  content:'';position:absolute;left:32px;top:0;bottom:0;
-  width:2px;
-  background:linear-gradient(to bottom,var(--cyan),var(--violet));
+/* ========== Schedule (Timeline) ========== */
+.schedule-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  max-width:800px;margin:0 auto;
 }
-.timeline-item{
-  position:relative;padding:0 0 40px 80px;
-  opacity:0;transform:translateY(20px);
-  transition:opacity .6s ease,transform .6s ease;
+.schedule-day{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
 }
-.timeline-item.visible{opacity:1;transform:translateY(0)}
-.timeline-item:last-child{padding-bottom:0}
-.timeline-dot{
-  position:absolute;left:24px;top:4px;
-  width:16px;height:16px;border-radius:0;
-  background:var(--cyan);border:none;
-  z-index:1;
-  box-shadow:3px 3px 0 rgba(0,212,255,.3);
+.schedule-day h3{
+  font-size:1.15rem;font-weight:700;
+  color:var(--orange);
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--orange-border);
 }
-.timeline-item:nth-child(even) .timeline-dot{background:var(--violet);box-shadow:3px 3px 0 rgba(124,58,237,.3)}
-.timeline-date{
-  font-size:.85rem;font-weight:600;color:var(--cyan);
-  margin-bottom:4px;
+.schedule-event{
+  display:flex;gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid #f0ece8;
 }
-.timeline-item:nth-child(even) .timeline-date{color:var(--violet)}
-.timeline-title{
-  font-size:1.1rem;font-weight:600;margin-bottom:4px;
+.schedule-event:last-child{border-bottom:none}
+.schedule-time{
+  font-size:.85rem;font-weight:600;
+  color:var(--orange);
+  min-width:64px;
+  flex-shrink:0;
 }
-.timeline-desc{
-  font-size:.9rem;color:var(--text-secondary);
-}
+.schedule-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.5}
+.schedule-event.highlight .schedule-time{font-weight:700}
+.schedule-event.highlight{background:var(--orange-bg);margin:0 -12px;padding:10px 12px;border-radius:6px}
 
-/* ==================== Prizes ==================== */
+/* ========== Prizes ========== */
 .prize-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:24px;
+  max-width:900px;margin:0 auto;
 }
 .prize-card{
   background:var(--bg-card);
+  border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:36px 28px;
   text-align:center;
-  border:1px solid rgba(255,255,255,.06);
-  transition:transform .3s,border-color .3s,box-shadow .3s;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
   position:relative;
-  overflow:hidden;
 }
-.prize-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,.2);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.prize-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
 .prize-card.gold{
-  border-radius:0;
-  border:2px solid rgba(0,212,255,.4);
-  box-shadow:inset 0 0 0 2px rgba(0,212,255,.15);
-  background:linear-gradient(135deg,var(--bg-card),#1a1a3a);
+  border:2px solid var(--orange);
+  box-shadow:0 0 0 1px var(--orange-border);
+  background:linear-gradient(135deg,#fff,var(--orange-bg));
 }
-.prize-card.gold::before{
-  content:'⬛⬛';position:absolute;top:8px;left:8px;
-  font-size:8px;color:var(--cyan);letter-spacing:1px;
-  opacity:.5;
-}
-.prize-card.gold:hover{border-color:var(--cyan);box-shadow:inset 0 0 0 2px rgba(0,212,255,.3),0 12px 40px rgba(0,0,0,.4)}
-.prize-icon{font-size:2.8rem;margin-bottom:16px}
-.prize-name{font-size:1.15rem;font-weight:700;margin-bottom:4px}
+.prize-card.gold:hover{border-color:var(--orange-dark);box-shadow:0 0 0 2px var(--orange-border),0 8px 24px rgba(226,89,42,.1)}
+.prize-icon{font-size:2.6rem;margin-bottom:12px;display:block}
+.prize-name{font-size:1.1rem;font-weight:700;margin-bottom:4px}
 .prize-amount{
-  font-size:1.6rem;font-weight:800;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  font-size:1.8rem;font-weight:800;
+  color:var(--orange);
   margin-bottom:8px;
 }
 .prize-desc{font-size:.85rem;color:var(--text-secondary)}
+.prize-total{
+  text-align:center;
+  margin-top:28px;
+  font-size:1.1rem;
+  color:var(--text-secondary);
+}
+.prize-total strong{color:var(--orange);font-weight:700}
 
-/* ==================== Registration ==================== */
+/* ========== FAQ ========== */
+.faq-list{max-width:680px;margin:0 auto}
+details.faq-item{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:12px;
+  overflow:hidden;
+  transition:border-color .3s;
+}
+details.faq-item[open]{border-color:var(--orange-border)}
+details.faq-item summary{
+  padding:16px 20px;
+  font-weight:600;
+  font-size:.95rem;
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:color .2s;
+  user-select:none;
+}
+details.faq-item summary::-webkit-details-marker{display:none}
+details.faq-item summary::after{
+  content:'+';
+  font-size:1.2rem;
+  color:var(--orange);
+  transition:transform .3s;
+  flex-shrink:0;
+  margin-left:12px;
+}
+details.faq-item[open] summary::after{
+  content:'−';
+}
+details.faq-item summary:hover{color:var(--orange)}
+details.faq-item .faq-answer{
+  padding:0 20px 16px;
+  font-size:.9rem;
+  color:var(--text-secondary);
+  line-height:1.7;
+}
+
+/* ========== Registration ========== */
 .registration{
   text-align:center;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,212,255,.06) 0%, transparent 60%),
-    var(--bg-dark);
 }
-.registration-card{
+.reg-card{
   max-width:560px;margin:0 auto;
   background:var(--bg-card);
+  border:1px solid var(--border);
   border-radius:var(--radius-lg);
   padding:48px 36px;
-  border:1px solid rgba(255,255,255,.08);
 }
-.registration-card h3{
-  font-size:1.3rem;font-weight:700;margin-bottom:8px;
-}
-.registration-card p{
-  color:var(--text-secondary);font-size:.9rem;margin-bottom:28px;
-}
-.reg-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 36px;
-  font-size:1rem;font-weight:600;
-  font-family:var(--font-sans);
-  color:#fff;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  border:2px solid var(--cyan);
-  border-radius:0;
-  cursor:pointer;text-decoration:none;
-  position:relative;
-  transition:transform .2s;
-  box-shadow:
-    0 2px 8px rgba(0,212,255,.15),
-    inset 0 0 0 2px rgba(255,255,255,.1);
-}
-.reg-cta:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,212,255,.3),inset 0 0 0 2px rgba(255,255,255,.2)}
-.reg-note{
-  margin-top:16px;font-size:.8rem;color:var(--text-secondary);
-}
+.reg-card h3{font-size:1.3rem;font-weight:700;margin-bottom:8px}
+.reg-card p{color:var(--text-secondary);font-size:.9rem;margin-bottom:28px}
+.reg-card .reg-note{margin-top:16px;font-size:.8rem;color:var(--text-muted)}
+.reg-card .reg-note a{color:var(--orange);text-decoration:none}
+.reg-card .reg-note a:hover{text-decoration:underline}
 
-/* ==================== Registration Modal ==================== */
+/* ========== Modal ========== */
 .modal-overlay{
   position:fixed;inset:0;z-index:2000;
-  background:rgba(0,0,0,.7);
+  background:rgba(0,0,0,.5);
   display:flex;align-items:center;justify-content:center;
   padding:24px;
   opacity:0;visibility:hidden;
@@ -398,14 +372,13 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
 }
 .modal-overlay.open{opacity:1;visibility:visible}
 .modal-content{
-  background:var(--bg-card);
-  border-radius:0;
+  background:var(--bg);
+  border-radius:var(--radius-lg);
   width:100%;max-width:640px;
   max-height:90vh;overflow-y:auto;
   padding:32px;
   position:relative;
-  border:2px solid var(--cyan);
-  box-shadow:inset 0 0 0 2px rgba(0,212,255,.1),0 8px 32px rgba(0,0,0,.5);
+  box-shadow:0 16px 48px rgba(0,0,0,.15);
   transform:translateY(20px) scale(.97);
   transition:transform .3s;
 }
@@ -414,117 +387,109 @@ section:nth-child(even){background:rgba(255,255,255,.02)}
   position:absolute;top:16px;right:16px;
   width:32px;height:32px;border-radius:50%;
   border:1px solid var(--border);
-  background:transparent;color:var(--text-secondary);
+  background:var(--bg);color:var(--text-secondary);
   font-size:1.2rem;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:background .2s,color .2s;
+  transition:all .2s;
 }
-.modal-close:hover{background:var(--bg-elevated);color:var(--text-primary)}
+.modal-close:hover{background:var(--bg-alt);color:var(--text-primary)}
 .modal-title{font-size:1.15rem;font-weight:700;margin-bottom:20px;text-align:center}
 .modal-iframe-wrap{
   position:relative;
   width:100%;min-height:500px;
-  border-radius:0;
+  border-radius:var(--radius);
   overflow:hidden;
-  background:var(--bg-elevated);
-  border:2px solid rgba(0,212,255,.2);
+  background:var(--bg-alt);
+  border:1px solid var(--border);
 }
-.modal-iframe-wrap iframe{
-  width:100%;height:500px;border:none;
-  display:block;
-}
+.modal-iframe-wrap iframe{width:100%;height:500px;border:none;display:block}
 .modal-loading{
   position:absolute;inset:0;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:12px;
   color:var(--text-secondary);
   font-size:.9rem;
+  background:var(--bg-alt);
 }
 .modal-spinner{
-  width:32px;height:32px;
+  width:36px;height:36px;
   border:3px solid var(--border);
-  background:var(--cyan);
-  border-radius:0;
-  animation:pixel-pulse .8s ease-in-out infinite;
+  border-top-color:var(--orange);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
 }
-@keyframes pixel-pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.4;transform:scale(.7)}
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 .modal-error{
   display:none;
   text-align:center;padding:40px 20px;
 }
 .modal-error.show{display:block}
 .modal-error p{color:var(--text-secondary);margin-bottom:16px}
-.modal-error a{
-  display:inline-flex;align-items:center;gap:6px;
-  color:var(--cyan);text-decoration:none;font-weight:500;
-}
-.modal-error a:hover{text-decoration:underline}
 
-/* ==================== Footer ==================== */
+/* ========== Footer ========== */
 footer{
-  border-top:1px solid rgba(255,255,255,.06);
-  padding:48px 0 32px;
+  border-top:1px solid var(--border);
+  padding:40px 0 28px;
   text-align:center;
+  background:var(--bg-alt);
 }
 footer .footer-brand{
-  font-size:1.1rem;font-weight:700;margin-bottom:8px;
-  color:var(--text-primary);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:8px;
 }
-footer .footer-brand span{color:var(--cyan)}
+footer .footer-brand svg{height:24px;width:auto}
+footer .footer-brand span{font-size:1rem;font-weight:700;color:var(--text-primary)}
 footer p{font-size:.85rem;color:var(--text-secondary);margin-bottom:4px}
 footer .footer-links{
   display:flex;justify-content:center;gap:24px;
-  margin:20px 0 16px;list-style:none;
+  margin:16px 0 12px;list-style:none;
 }
 footer .footer-links a{
   color:var(--text-secondary);text-decoration:none;
   font-size:.85rem;transition:color .2s;
 }
-footer .footer-links a:hover{color:var(--cyan)}
-footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
+footer .footer-links a:hover{color:var(--orange)}
+footer .copyright{font-size:.78rem;color:var(--text-muted)}
 
-/* ==================== Scroll Reveal ==================== */
+/* ========== Scroll Reveal ========== */
 .reveal{
   opacity:0;transform:translateY(30px);
   transition:opacity .7s ease,transform .7s ease;
 }
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ==================== Responsive ==================== */
+/* ========== Responsive ========== */
 @media(max-width:1024px){
-  .prize-grid{grid-template-columns:repeat(2,1fr)}
+  .schedule-grid{gap:24px}
 }
 @media(max-width:768px){
-  section{padding:var(--space-xl-mobile) 0}
+  .section{padding:var(--space-xl-mobile) 0}
   .nav-links{
     position:fixed;top:var(--nav-h);left:0;right:0;
     flex-direction:column;gap:0;
-    background:rgba(10,10,26,.96);
+    background:rgba(255,255,255,.98);
     backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,255,255,.06);
-    padding:16px 24px;
+    border-bottom:1px solid var(--border);
+    padding:12px 24px 16px;
     display:none;
   }
   .nav-links.open{display:flex}
-  .nav-links a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:1rem}
+  .nav-links a{padding:12px 0;border-bottom:1px solid #f0ece8;font-size:1rem}
   .nav-links a:last-child{border-bottom:none}
+  .nav-links .nav-cta{margin-top:12px;text-align:center}
   .nav-toggle{display:flex}
-  .timeline::before{left:24px}
-  .timeline-item{padding-left:64px}
-  .timeline-dot{left:16px}
+  .schedule-grid{grid-template-columns:1fr}
   .prize-grid{grid-template-columns:1fr}
-  .registration-card{padding:36px 24px}
-  .hero h1{font-size:clamp(1.8rem,8vw,2.8rem)}
+  .reg-card{padding:36px 24px}
+  .hero-actions{flex-direction:column;align-items:center}
   .modal-iframe-wrap{min-height:400px}
   .modal-iframe-wrap iframe{height:400px}
 }
 @media(max-width:480px){
   .hero{padding-top:calc(var(--nav-h) + 40px)}
-  .hero-cta,.reg-cta{width:100%;justify-content:center}
+  .btn,.btn-lg{width:100%;justify-content:center}
   .modal-content{padding:24px 16px}
+  .schedule-day{padding:20px}
 }
 </style>
 </head>
@@ -533,35 +498,75 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <!-- ==================== Nav ==================== -->
 <nav>
   <div class="container">
-    <a href="#" class="nav-logo">CHANCE<span>TOP</span></a>
+    <a href="#home" class="nav-logo">
+      <svg width="105" height="27" viewBox="0 0 105 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_nav)">
+          <path d="M25.3469 7.40735L26.8571 8.50101C27.9703 9.30767 28.4374 10.7348 28.0092 12.0379L24.8097 21.8498H14.2147L12.9225 17.894H21.8437H21.9216L25.3469 7.40735ZM19.664 8.18299L16.8849 16.7073H21.0653L24.3348 6.6705L15.9507 0.604999C14.8375 -0.201666 13.3273 -0.201666 12.2141 0.604999L10.7038 1.69865L19.664 8.18299ZM23.8444 24.8127L24.4205 23.0442H13.3506L13.2961 22.8736L10.5715 14.52L7.19295 16.9632L10.4625 27H20.8239C22.2018 27 23.424 26.1158 23.8444 24.8127ZM5.7917 16.5056L5.83062 16.4823L13.0704 11.239L9.69183 8.79575L1.12088 15.0009L4.32039 24.8127C4.74855 26.1158 5.96296 27 7.34086 27H9.20918L7.91692 23.0442L5.7917 16.5056ZM9.69183 7.32203L16.9705 12.5886L18.2628 8.63286L9.69183 2.42775L1.30772 8.50101C0.194504 9.30767 -0.272578 10.7348 0.15558 12.0379L0.731648 13.8064L9.69183 7.32203Z" fill="#E2592A"/>
+          <path d="M35.4904 21.7803C36.2767 21.7803 36.736 22.0983 36.9384 22.6878C36.9851 22.8196 36.9539 22.8817 36.8294 22.9282L36.5335 23.0291C36.409 23.0678 36.3545 23.0523 36.3078 22.9127C36.191 22.5792 35.9341 22.4163 35.4904 22.4163C34.9377 22.4163 34.6341 22.6878 34.6341 23.1919V24.3942C34.6341 24.8906 34.9377 25.1698 35.4904 25.1698C35.9419 25.1698 36.191 24.9992 36.3078 24.6657C36.3623 24.526 36.4168 24.5028 36.5413 24.5493L36.8294 24.6501C36.9539 24.6967 36.9928 24.7587 36.9461 24.8906C36.7437 25.4801 36.2767 25.8058 35.4904 25.8058C34.5095 25.8058 33.9646 25.2629 33.9646 24.3864V23.1919C33.9646 22.3232 34.5095 21.7803 35.4904 21.7803Z" fill="#181616"/>
+          <path d="M38.1528 21.8655V22.8971C38.1995 22.8738 38.4797 22.8195 38.7911 22.8195C39.554 22.8195 39.8965 23.2228 39.8965 23.9132V25.5497C39.8965 25.6739 39.8576 25.7204 39.7331 25.7204H39.445C39.3205 25.7204 39.2816 25.6739 39.2816 25.5497V23.9287C39.2816 23.5796 39.0792 23.3935 38.6977 23.3935C38.433 23.3935 38.1995 23.4478 38.145 23.4788V25.5497C38.145 25.6739 38.1061 25.7204 37.9815 25.7204H37.6857C37.5611 25.7204 37.5222 25.6739 37.5222 25.5497V21.8655C37.5222 21.7414 37.5611 21.6948 37.6857 21.6948H37.9815C38.1139 21.7026 38.1528 21.7414 38.1528 21.8655Z" fill="#181616"/>
+          <path d="M41.6559 22.8271C42.5278 22.8271 42.8002 23.308 42.8002 23.9441V25.3557C42.8002 25.5496 42.7613 25.6039 42.6056 25.666C42.411 25.7513 42.084 25.8056 41.6481 25.8056C40.7061 25.8056 40.457 25.4876 40.457 24.9214C40.457 24.2698 40.8151 24.0449 41.6714 24.0449C41.8816 24.0449 42.0918 24.0682 42.1852 24.0682V23.913C42.1852 23.5718 42.0529 23.3779 41.6481 23.3779C41.3834 23.3779 41.1966 23.4632 41.0876 23.6416C41.0097 23.7579 40.9786 23.7734 40.8618 23.7269L40.6516 23.6338C40.5349 23.5795 40.496 23.5175 40.5582 23.3856C40.7373 23.0366 41.1032 22.8271 41.6559 22.8271ZM41.5936 24.5646C41.1888 24.5646 41.0798 24.6964 41.0798 24.9214C41.0798 25.1463 41.1654 25.2859 41.578 25.2859C41.8505 25.2859 42.014 25.2627 42.1074 25.2394C42.1463 25.2239 42.1697 25.2161 42.1697 25.1618V24.5878C42.0685 24.5878 41.8038 24.5646 41.5936 24.5646Z" fill="#181616"/>
+          <path d="M44.7231 22.8271C45.4782 22.8271 45.8285 23.2305 45.8285 23.9208V25.5574C45.8285 25.6815 45.7896 25.728 45.6651 25.728H45.3692C45.2447 25.728 45.2058 25.6815 45.2058 25.5574V23.9363C45.2058 23.5795 45.0111 23.4011 44.6219 23.4011C44.4117 23.4011 44.2482 23.4321 44.1081 23.4709C44.0848 23.4787 44.0692 23.502 44.0692 23.5252V25.5496C44.0692 25.6737 44.0303 25.7203 43.9057 25.7203H43.6099C43.4853 25.7203 43.4464 25.6737 43.4464 25.5496V23.3158C43.4464 23.1452 43.4853 23.0754 43.6566 23.0055C43.8824 22.9202 44.2093 22.8271 44.7231 22.8271Z" fill="#181616"/>
+          <path d="M47.6423 22.8271C48.0705 22.8271 48.4208 22.9125 48.6076 22.9978C48.7789 23.0831 48.8022 23.1219 48.8022 23.3003V25.8211C48.8022 26.5347 48.4675 27.0078 47.6267 27.0078C47.0507 27.0078 46.7081 26.8062 46.5213 26.4882C46.4435 26.3718 46.459 26.2787 46.5836 26.2167L46.786 26.1003C46.9105 26.0383 46.9728 26.0538 47.0584 26.1624C47.1674 26.3408 47.3231 26.4416 47.6112 26.4416C47.9848 26.4416 48.1794 26.24 48.1794 25.8521V25.5807C48.016 25.6272 47.798 25.6815 47.5411 25.6815C46.7782 25.6815 46.4357 25.2704 46.4357 24.5878V23.9673C46.4357 23.2305 46.8249 22.8271 47.6423 22.8271ZM47.689 23.4011C47.2608 23.4011 47.0584 23.5873 47.0584 23.9906V24.5646C47.0584 24.9059 47.2608 25.0998 47.6423 25.0998C47.8681 25.0998 48.0549 25.0532 48.195 25.0222V23.5252C48.195 23.4864 48.1872 23.4787 48.1483 23.4632C48.0237 23.4321 47.8603 23.4011 47.689 23.4011Z" fill="#181616"/>
+          <path d="M50.4059 22.4163V22.905H51.0131C51.1377 22.905 51.1766 22.9437 51.1766 23.0678V23.316C51.1766 23.4401 51.1377 23.4867 51.0131 23.4867H50.4059V24.5803C50.4059 25.1155 50.5616 25.2086 51.0053 25.2086C51.1299 25.2086 51.1766 25.2474 51.1766 25.3792V25.6274C51.1766 25.7593 51.1377 25.7981 51.0053 25.7981C50.1257 25.8214 49.7831 25.5421 49.7831 24.6036V23.4867H49.4173C49.2927 23.4867 49.2538 23.4401 49.2538 23.316V23.0678C49.2538 22.9437 49.2927 22.905 49.4173 22.905H49.7831V22.4163C49.7831 22.2922 49.8221 22.2534 49.9466 22.2534H50.2347C50.367 22.2534 50.4059 22.2922 50.4059 22.4163Z" fill="#181616"/>
+          <path d="M54.0414 23.0677V25.3093C54.0414 25.4799 54.0024 25.542 53.8312 25.6118C53.621 25.6971 53.294 25.8057 52.788 25.8057C52.0251 25.8057 51.6748 25.3946 51.6748 24.712V23.0677C51.6748 22.9436 51.7137 22.9048 51.8383 22.9048H52.1341C52.2587 22.9048 52.2976 22.9436 52.2976 23.0677V24.6888C52.2976 25.0533 52.4922 25.2239 52.8814 25.2239C53.0916 25.2239 53.2317 25.2007 53.3719 25.1619C53.4186 25.1464 53.4341 25.1154 53.4341 25.0688V23.0677C53.4341 22.9436 53.4731 22.9048 53.5976 22.9048H53.8857C54.0024 22.9048 54.0414 22.9436 54.0414 23.0677Z" fill="#181616"/>
+          <path d="M55.894 22.8271C56.6959 22.8271 57.124 23.2382 57.124 23.913V24.7197C57.124 25.3945 56.6959 25.8056 55.894 25.8056C55.1078 25.8056 54.6641 25.3945 54.6641 24.7197V23.913C54.6641 23.2382 55.1078 22.8271 55.894 22.8271ZM55.894 23.3934C55.5048 23.3934 55.2868 23.5795 55.2868 23.913V24.7197C55.2868 25.0455 55.5048 25.2394 55.894 25.2394C56.2911 25.2394 56.509 25.0455 56.509 24.7197V23.913C56.509 23.5795 56.2911 23.3934 55.894 23.3934Z" fill="#181616"/>
+          <path d="M61.538 22.0514V22.3151C61.538 22.4547 61.4913 22.5013 61.3589 22.5013H60.4403V25.5418C60.4403 25.6814 60.3936 25.7279 60.2613 25.7279H59.9499C59.8176 25.7279 59.7709 25.6814 59.7709 25.5418V22.5013H58.8523C58.7121 22.5013 58.6732 22.4547 58.6732 22.3151V22.0514C58.6732 21.9118 58.7121 21.8652 58.8523 21.8652H61.3589C61.4913 21.8652 61.538 21.9118 61.538 22.0514Z" fill="#181616"/>
+          <path d="M62.6512 22.8271C63.4997 22.8271 63.8812 23.3236 63.8812 23.9518V24.2853C63.8812 24.425 63.8267 24.518 63.6398 24.518H62.0284V24.7197C62.0284 25.0765 62.2464 25.2627 62.6356 25.2627C62.947 25.2627 63.1494 25.1541 63.2662 24.9757C63.3518 24.8593 63.4063 24.8361 63.5386 24.9136L63.7255 25.0144C63.85 25.0765 63.8656 25.1696 63.7878 25.2859C63.5931 25.6039 63.235 25.8056 62.6356 25.8056C61.7637 25.8056 61.4056 25.3092 61.4056 24.6421V23.9984C61.4134 23.246 61.8416 22.8271 62.6512 22.8271ZM62.6512 23.3546C62.2542 23.3546 62.0362 23.5562 62.0362 23.9053V24.0216H63.2662V23.9053C63.2662 23.5562 63.056 23.3546 62.6512 23.3546Z" fill="#181616"/>
+          <path d="M65.6172 22.8271C66.2555 22.8271 66.6214 23.1296 66.7616 23.5407C66.8005 23.6804 66.7693 23.7346 66.6448 23.7889L66.4112 23.8665C66.2867 23.9208 66.2244 23.882 66.1777 23.7502C66.0921 23.5252 65.913 23.3856 65.5939 23.3856C65.2124 23.3856 65.01 23.5795 65.01 23.9208V24.7275C65.01 25.061 65.2046 25.2627 65.5939 25.2627C65.9052 25.2627 66.0921 25.123 66.1777 24.8903C66.2244 24.7585 66.2867 24.7352 66.4112 24.7818L66.6526 24.8516C66.7771 24.8981 66.816 24.9602 66.7616 25.0998C66.5825 25.5652 66.2166 25.8211 65.5705 25.8211C64.7609 25.8211 64.395 25.3945 64.395 24.7042V23.9518C64.3872 23.246 64.7765 22.8271 65.6172 22.8271Z" fill="#181616"/>
+          <path d="M67.9604 21.8655V22.8971C68.0071 22.8738 68.2874 22.8195 68.5987 22.8195C69.3617 22.8195 69.7042 23.2228 69.7042 23.9132V25.5497C69.7042 25.6739 69.6653 25.7204 69.5407 25.7204H69.2527C69.1281 25.7204 69.0892 25.6739 69.0892 25.5497V23.9287C69.0892 23.5796 68.8868 23.3935 68.5053 23.3935C68.2406 23.3935 68.0071 23.4478 67.9526 23.4788V25.5497C67.9526 25.6739 67.9137 25.7204 67.7891 25.7204H67.4933C67.3688 25.7204 67.3298 25.6739 67.3298 25.5497V21.8655C67.3298 21.7414 67.3688 21.6948 67.4933 21.6948H67.7891C67.9215 21.7026 67.9604 21.7414 67.9604 21.8655Z" fill="#181616"/>
+          <path d="M71.6582 22.8271C72.4133 22.8271 72.7636 23.2305 72.7636 23.9208V25.5574C72.7636 25.6815 72.7247 25.728 72.6001 25.728H72.3043C72.1797 25.728 72.1408 25.6815 72.1408 25.5574V23.9363C72.1408 23.5795 71.9462 23.4011 71.557 23.4011C71.3468 23.4011 71.1833 23.4321 71.0432 23.4709C71.0198 23.4787 71.0042 23.502 71.0042 23.5252V25.5496C71.0042 25.6737 70.9653 25.7203 70.8408 25.7203H70.5449C70.4204 25.7203 70.3815 25.6737 70.3815 25.5496V23.3158C70.3815 23.1452 70.4204 23.0754 70.5917 23.0055C70.8174 22.9202 71.1444 22.8271 71.6582 22.8271Z" fill="#181616"/>
+          <path d="M74.6007 22.8271C75.4025 22.8271 75.8307 23.2382 75.8307 23.913V24.7197C75.8307 25.3945 75.4025 25.8056 74.6007 25.8056C73.8145 25.8056 73.3707 25.3945 73.3707 24.7197V23.913C73.3707 23.2382 73.8145 22.8271 74.6007 22.8271ZM74.6007 23.3934C74.2115 23.3934 73.9935 23.5795 73.9935 23.913V24.7197C73.9935 25.0455 74.2115 25.2394 74.6007 25.2394C74.9977 25.2394 75.2157 25.0455 75.2157 24.7197V23.913C75.2157 23.5795 74.9977 23.3934 74.6007 23.3934Z" fill="#181616"/>
+          <path d="M76.9361 25.7204H76.6481C76.5235 25.7204 76.4846 25.6739 76.4846 25.5497V21.8655C76.4846 21.7414 76.5235 21.6948 76.6481 21.6948H76.9361C77.0607 21.6948 77.0996 21.7414 77.0996 21.8655V25.5497C77.0996 25.6816 77.0607 25.7204 76.9361 25.7204Z" fill="#181616"/>
+          <path d="M78.9757 22.8271C79.7775 22.8271 80.2057 23.2382 80.2057 23.913V24.7197C80.2057 25.3945 79.7775 25.8056 78.9757 25.8056C78.1895 25.8056 77.7457 25.3945 77.7457 24.7197V23.913C77.7535 23.2382 78.1895 22.8271 78.9757 22.8271ZM78.9757 23.3934C78.5865 23.3934 78.3685 23.5795 78.3685 23.913V24.7197C78.3685 25.0455 78.5865 25.2394 78.9757 25.2394C79.3727 25.2394 79.5907 25.0455 79.5907 24.7197V23.913C79.5907 23.5795 79.3727 23.3934 78.9757 23.3934Z" fill="#181616"/>
+          <path d="M81.9572 22.8271C82.3854 22.8271 82.7357 22.9125 82.9225 22.9978C83.0938 23.0831 83.1172 23.1219 83.1172 23.3003V25.8211C83.1172 26.5347 82.7824 27.0078 81.9417 27.0078C81.3656 27.0078 81.0231 26.8062 80.8362 26.4882C80.7584 26.3718 80.774 26.2787 80.8985 26.2167L81.1009 26.1003C81.2255 26.0383 81.2878 26.0538 81.3734 26.1624C81.4824 26.3408 81.6381 26.4416 81.9261 26.4416C82.2998 26.4416 82.4944 26.24 82.4944 25.8521V25.5807C82.3309 25.6272 82.1129 25.6815 81.856 25.6815C81.0931 25.6815 80.7506 25.2704 80.7506 24.5878V23.9673C80.7506 23.2305 81.1398 22.8271 81.9572 22.8271ZM82.0039 23.4011C81.5758 23.4011 81.3734 23.5873 81.3734 23.9906V24.5646C81.3734 24.9059 81.5758 25.0998 81.9572 25.0998C82.183 25.0998 82.3698 25.0532 82.51 25.0222V23.5252C82.51 23.4864 82.5022 23.4787 82.4632 23.4632C82.3387 23.4321 82.1752 23.4011 82.0039 23.4011Z" fill="#181616"/>
+          <path d="M86.1766 23.0677V25.8134C86.1766 26.527 85.8419 27.0002 85.0011 27.0002C84.425 27.0002 84.0825 26.7985 83.8957 26.4805C83.8178 26.3641 83.8334 26.2711 83.9657 26.209L84.1682 26.0927C84.2927 26.0306 84.355 26.0461 84.4328 26.1547C84.5418 26.3331 84.7053 26.4339 84.9933 26.4339C85.367 26.4339 85.5616 26.2323 85.5616 25.8445V25.5963C85.3981 25.635 85.1879 25.6738 84.9233 25.6738C84.1604 25.6738 83.8101 25.2627 83.8101 24.5802V23.0754C83.8101 22.9513 83.849 22.9125 83.9735 22.9125H84.2694C84.3939 22.9125 84.4328 22.9513 84.4328 23.0754V24.5569C84.4328 24.9214 84.6274 25.0921 85.0167 25.0921C85.2424 25.0921 85.4215 25.0533 85.5694 25.0145V23.0677C85.5694 22.9436 85.6083 22.9048 85.7329 22.9048H86.0209C86.1377 22.9048 86.1766 22.9436 86.1766 23.0677Z" fill="#181616"/>
+          <path d="M74.4218 9.09806V7.18223L74.523 7.17448C74.7877 7.15121 75.0679 7.11243 75.3637 7.06589C75.6595 7.01935 75.932 6.97281 76.1733 6.92627C76.4147 6.87973 76.6171 6.84095 76.7805 6.80217C76.8506 6.78666 76.9051 6.77114 76.944 6.76339L76.6638 5.57666C76.5548 5.59993 76.4147 5.6232 76.2434 5.66198C76.0176 5.70852 75.7685 5.75506 75.5039 5.8016C75.2392 5.84813 74.9667 5.88692 74.7098 5.91794C74.4451 5.94897 74.2116 5.96448 74.017 5.96448H70.7552V7.19775H73.1918V9.10582H70.4983V10.3391H71.5804H72.8103H73.1918V10.4477V19.6157H74.4296V10.3313H77.0997V9.09806H74.4218Z" fill="#181616"/>
+          <path d="M78.68 11.2544L77.9404 12.255L81.1399 14.5664L81.8561 13.5658L78.68 11.2544Z" fill="#181616"/>
+          <path d="M81.1166 9.86618L81.8561 8.87336L78.6644 6.5542L77.9404 7.55477L81.1166 9.86618Z" fill="#181616"/>
+          <path d="M94.2493 12.8989L92.49 13.5815V8.6484H94.405V7.40738H92.49V5.53809H91.2522V7.41513H89.0959V8.6484H91.2522V14.0468L88.7611 14.9931L89.1971 16.1488L91.2756 15.3577L91.2522 17.9949C91.2522 18.1888 91.1277 18.3051 90.9253 18.3051H89.0959V19.5384H90.9408C91.3846 19.5384 91.7426 19.391 92.0463 19.0963C92.3499 18.7938 92.49 18.437 92.49 17.9949V14.8923L94.6853 14.0624L94.2493 12.8989Z" fill="#181616"/>
+          <path d="M99.3094 8.25282V10.5332H95.6428V11.7432H103.015V11.9836V12.0147L102.999 12.0457C102.859 12.2551 102.548 12.6585 102.057 13.2402C101.567 13.8219 100.866 14.489 99.9711 15.2103L99.9088 15.2568L99.8387 15.2181L96.32 12.9842L95.6661 14.0081L98.7099 15.9549L98.8501 16.048L98.7099 16.1411C98.1183 16.5289 97.4644 16.9245 96.756 17.3045C96.0787 17.6691 95.3158 18.0259 94.4984 18.3672L94.9655 19.5073C95.9619 19.0963 96.8728 18.6541 97.6746 18.2043C98.5075 17.7389 99.2549 17.2657 99.9166 16.8081L99.9788 16.7693L100.041 16.8081L104.354 19.5229L105.008 18.499L101.139 16.0402L101.014 15.9627L101.131 15.8696C101.653 15.4352 102.112 15.0086 102.493 14.6131C102.875 14.2097 103.194 13.8607 103.435 13.566C103.677 13.2712 103.863 13.0308 103.98 12.8446C104.027 12.7748 104.159 12.5654 104.175 12.5344L104.253 12.387V10.5565H100.547V8.27609H104.751V7.02731H100.547V5.53809H99.3094V7.02731H95.1056V8.26058H99.3094V8.25282Z" fill="#181616"/>
+          <path d="M84.2304 5.64648H82.9927V19.5304H84.2304V5.64648Z" fill="#181616"/>
+          <path d="M38.7055 7.57802H37.6857H37.5768V7.46167V5.53809H36.339V7.46943V7.57802H36.23H35.2725C34.4084 7.57802 33.7078 8.27609 33.7078 9.13705V16.4358C33.7078 17.2968 34.4084 17.9949 35.2725 17.9949H36.23H36.339V18.1034V19.5927H37.5768V18.1034V17.9949H37.6857H38.6588C39.0325 17.9949 39.3828 17.8863 39.6475 17.6846C39.8732 17.514 40.0445 17.3045 40.1457 17.0563L40.2158 16.8236C40.2469 16.715 40.2625 16.5832 40.2625 16.4513V9.13705C40.2703 8.27609 39.5696 7.57802 38.7055 7.57802ZM36.339 13.0695V16.653V16.7616H36.23H35.2491C35.0779 16.7616 34.9377 16.622 34.9377 16.4513V13.0695V12.9532H35.0467H36.23H36.339V13.0695ZM36.339 8.91212V11.6113V11.7199H36.23H35.0467H34.9377V11.6113V9.10603C34.9377 8.93538 35.0779 8.79577 35.2491 8.79577H36.23H36.339V8.91212ZM39.0325 13.0695V16.4513C39.0325 16.622 38.8924 16.7616 38.7211 16.7616H37.6857H37.5768V16.653V13.0695V12.9532H37.6857H38.9235H39.0325V13.0695ZM39.0325 11.6191V11.7277H38.9235H37.6857H37.5768V11.6191V8.91987V8.81128H37.6857H38.7211C38.8924 8.81128 39.0325 8.9509 39.0325 9.12154V11.6191Z" fill="#181616"/>
+          <path d="M56.5091 12.767L55.1079 13.3798V8.64064H56.7504V7.40738L55.1079 7.42289V5.53809H53.8701V7.40738L52.0251 7.42289V8.64064H53.8701V13.9072L51.7449 14.8458L52.2275 15.9704L53.8623 15.2491V17.9871C53.8623 18.1577 53.7222 18.2973 53.5509 18.2973H52.0952V19.5306H53.5431C53.9168 19.5306 54.2671 19.4065 54.5396 19.1816C54.921 18.8636 55.1079 18.4757 55.1079 17.9871V14.7217L57.0073 13.8917L56.5091 12.767Z" fill="#181616"/>
+          <path d="M57.8715 7.26756L60.4949 7.28307L60.4638 7.41493C60.3859 7.73294 60.2769 8.15179 60.1212 8.64044C59.9656 9.13685 59.7476 9.70306 59.4751 10.3158C59.1949 10.9286 58.8523 11.5956 58.4475 12.2859C58.0583 12.953 57.5912 13.6356 57.0541 14.3181L58.0116 15.086C58.1906 14.8688 58.3619 14.6516 58.5176 14.4267C58.6966 14.1707 58.8679 13.9148 59.047 13.6743L59.2494 13.3873V13.7364V18.0024C59.2494 18.8634 59.95 19.5614 60.8141 19.5614H65.8664C66.3568 19.5614 66.746 19.3753 67.0652 18.9952C67.291 18.7237 67.4155 18.3747 67.4155 18.0024V12.8909C67.4155 12.03 66.7149 11.3319 65.8508 11.3319H60.5572H60.3859L60.456 11.1768C60.853 10.3236 61.1566 9.55569 61.3512 8.8964C61.5458 8.23711 61.686 7.72518 61.756 7.37615L61.7716 7.29083H68.1473V6.0498H57.8715V7.26756ZM60.4716 13.1004C60.4716 12.7979 60.7207 12.5497 61.0243 12.5497H65.6172C65.9208 12.5497 66.17 12.7979 66.17 13.1004V17.7697C66.17 18.0722 65.9208 18.3204 65.6172 18.3204H61.0243C60.7207 18.3204 60.4716 18.0722 60.4716 17.7697V13.1004Z" fill="#181616"/>
+          <path d="M47.8837 10.2385H43.5943L48.9113 6.85675V5.61572H41.4613V6.84899H46.6304L41.329 10.2308V11.4718H43.789C43.7345 11.7898 43.6333 12.2164 43.5087 12.7438C43.3686 13.3023 43.1662 13.9228 42.9093 14.5976C42.6524 15.2724 42.3176 15.9938 41.9206 16.7229C41.5392 17.4287 41.0643 18.1035 40.5116 18.7395L41.4302 19.5462C42.0841 18.7861 42.6368 17.9794 43.0805 17.1495C43.5398 16.2885 43.9135 15.4586 44.1938 14.6907C44.474 13.9228 44.6842 13.2247 44.8087 12.6197C44.9099 12.1233 44.9878 11.7433 45.0423 11.464H46.389C46.3501 11.7665 46.2878 12.1544 46.2022 12.6197C46.101 13.186 45.9375 13.822 45.7196 14.5045C45.5016 15.1949 45.2136 15.9317 44.8632 16.6841C44.5207 17.4132 44.0926 18.119 43.5866 18.7861L44.5519 19.5384C45.1591 18.7395 45.6651 17.9018 46.0543 17.0486C46.4591 16.1567 46.7861 15.3112 47.0118 14.5201C47.2454 13.7367 47.4088 13.0231 47.4945 12.4181C47.549 12.0303 47.5957 11.7122 47.6268 11.4563H47.6502H47.8681C47.9538 11.4563 48.1172 11.5028 48.1717 11.6657H48.1951V11.7743V17.9717C48.1951 18.1501 48.0472 18.3052 47.8603 18.3052H46.0543V19.5384H47.8759C48.3196 19.5384 48.6777 19.3911 48.9813 19.0963C49.2849 18.7938 49.4251 18.437 49.4251 17.9949V11.7821C49.4484 10.9366 48.7478 10.2385 47.8837 10.2385Z" fill="#181616"/>
+          <path d="M76.4379 11.2544H75.1924V19.4219H76.4379V11.2544Z" fill="#181616"/>
+          <path d="M71.1599 11.2544V11.5181C71.1599 14.7525 70.9264 17.3354 70.4749 19.2047L70.4515 19.3133L71.6582 19.608L71.6815 19.4994C72.1642 17.6146 72.4055 14.9232 72.4055 11.5181V11.2544H71.1599Z" fill="#181616"/>
+          <path d="M77.6708 16.1417V17.375H86.592V16.1417H77.6708Z" fill="#181616"/>
+        </g>
+        <defs><clipPath id="clip0_nav"><rect width="105" height="27" fill="white"/></clipPath></defs>
+      </svg>
+    </a>
     <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#schedule">赛事赛程</a></li>
+      <li><a href="#home">首页</a></li>
+      <li><a href="#schedule">赛程</a></li>
       <li><a href="#prizes">奖项</a></li>
-      <li><a href="#register">报名</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#register" class="nav-cta">立即报名</a></li>
     </ul>
   </div>
 </nav>
 
 <!-- ==================== Hero ==================== -->
-<section class="hero" id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-stars"></div>
+<section class="hero" id="home">
+  <div class="hero-accent"></div>
+  <div class="hero-accent-2"></div>
   <div class="hero-content">
     <div class="hero-badge">2026 · HACKATHON</div>
-    <p class="hero-pixel-subtitle">AI HACKATHON 2026</p>
     <h1>
-      CHANCETOP<br>
+      Chance Top<br>
       <span class="highlight">2026 黑客松</span>
     </h1>
     <p class="hero-tagline">AI · 创新 · 未来</p>
+    <p class="hero-prize">总奖池 ¥500,000</p>
     <p class="hero-date"><strong>2026.06.16</strong> — <strong>2026.06.17</strong></p>
-    <a href="#register" class="hero-cta">
-      ▸ 立即报名
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+    <div class="hero-actions">
+      <a href="#register" class="btn btn-lg">立即报名</a>
+      <a href="#schedule" class="btn btn-outline btn-lg">了解更多</a>
+    </div>
   </div>
   <div class="hero-scroll-hint">
     <span>向下滚动了解更多</span>
@@ -569,72 +574,175 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
   </div>
 </section>
 
+<!-- ==================== Highlights ==================== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="highlights-grid reveal">
+      <div class="highlight-card">
+        <span class="highlight-icon">💰</span>
+        <h3>50 万奖金池</h3>
+        <p>总奖金 ¥500,000，等你来挑战</p>
+      </div>
+      <div class="highlight-card">
+        <span class="highlight-icon">🚀</span>
+        <h3>创新挑战</h3>
+        <p>AI 主题，从创意到产品落地</p>
+      </div>
+      <div class="highlight-card">
+        <span class="highlight-icon">🤝</span>
+        <h3>技术交流</h3>
+        <p>结识开发者，碰撞技术火花</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== Schedule ==================== -->
-<section id="schedule">
+<section class="section" id="schedule">
   <div class="container">
     <h2 class="section-title reveal">赛事赛程</h2>
-    <div class="pixel-divider reveal"></div>
+    <div class="section-divider reveal"></div>
     <p class="section-subtitle reveal">为期两天的 AI 黑客松，从创意到落地</p>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 16 日 · 全天</div>
-        <div class="timeline-title">Hack 日</div>
-        <div class="timeline-desc">开幕式 &amp; 赛题公布 &amp; 组队 &amp; 自由开发 &amp; 导师指导</div>
+    <div class="schedule-grid reveal">
+      <div class="schedule-day">
+        <h3>Day 1 · 6月16日</h3>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">09:00</span>
+          <span class="schedule-desc">开幕致辞 &amp; 赛题公布</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">09:30</span>
+          <span class="schedule-desc">组队环节</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">10:00</span>
+          <span class="schedule-desc">Hacking 开始</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">12:00</span>
+          <span class="schedule-desc">午餐 &amp; 技术分享</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">14:00</span>
+          <span class="schedule-desc">导师指导</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">18:00</span>
+          <span class="schedule-desc">第一天结束 · 自由开发</span>
+        </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">6 月 17 日 · 全天</div>
-        <div class="timeline-title">路演 &amp; 颁奖</div>
-        <div class="timeline-desc">作品提交 &amp; 项目演示 &amp; 评委评审 &amp; 颁奖典礼</div>
+      <div class="schedule-day">
+        <h3>Day 2 · 6月17日</h3>
+        <div class="schedule-event">
+          <span class="schedule-time">09:00</span>
+          <span class="schedule-desc">最终冲刺</span>
+        </div>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">12:00</span>
+          <span class="schedule-desc">作品提交截止</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">13:00</span>
+          <span class="schedule-desc">项目路演 / Demo</span>
+        </div>
+        <div class="schedule-event">
+          <span class="schedule-time">15:00</span>
+          <span class="schedule-desc">评委评审</span>
+        </div>
+        <div class="schedule-event highlight">
+          <span class="schedule-time">16:30</span>
+          <span class="schedule-desc">颁奖典礼</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ==================== Prizes ==================== -->
-<section id="prizes">
+<section class="section section-alt" id="prizes">
   <div class="container">
     <h2 class="section-title reveal">奖项设置</h2>
-    <div class="pixel-divider reveal"></div>
+    <div class="section-divider reveal"></div>
     <p class="section-subtitle reveal">总奖池 ¥500,000，丰厚奖励等你来拿</p>
-    <div class="prize-grid">
-      <div class="prize-card gold reveal">
-        <div class="prize-icon">🥇</div>
+    <div class="prize-grid reveal">
+      <div class="prize-card gold">
+        <span class="prize-icon">🥇</span>
         <div class="prize-name">一等奖</div>
         <div class="prize-amount">¥300,000</div>
         <div class="prize-desc">1 名 · 现金奖励 + 荣誉证书 + 直通加速器</div>
       </div>
-      <div class="prize-card reveal">
-        <div class="prize-icon">🥈</div>
+      <div class="prize-card">
+        <span class="prize-icon">🥈</span>
         <div class="prize-name">二等奖</div>
         <div class="prize-amount">¥100,000</div>
         <div class="prize-desc">1 名 · 现金奖励 + 荣誉证书</div>
       </div>
-      <div class="prize-card reveal">
-        <div class="prize-icon">🥉</div>
+      <div class="prize-card">
+        <span class="prize-icon">🥉</span>
         <div class="prize-name">三等奖</div>
         <div class="prize-amount">¥25,000</div>
         <div class="prize-desc">4 名 · 现金奖励 + 荣誉证书</div>
       </div>
     </div>
+    <p class="prize-total reveal">总奖池 <strong>¥500,000</strong> · 一等奖 ¥300,000 + 二等奖 ¥100,000 + 三等奖 ¥25,000 × 4</p>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-title reveal">常见问题</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">关于黑客松，你可能想了解这些</p>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>谁可以参加？</summary>
+        <div class="faq-answer">
+          <p>本次黑客松面向所有开发者、设计师、产品经理开放。无论是学生、创业者还是在职专业人士，只要你热爱技术、有创意，都欢迎报名参赛。个人或团队（2-4人）均可参赛。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>团队最多几个人？</summary>
+        <div class="faq-answer">
+          <p>每支队伍 2-4 人。可以提前组队报名，也可以在开幕式当天现场组队。我们鼓励跨角色组队（开发者 + 设计师 + 产品经理）。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>作品归属权归谁？</summary>
+        <div class="faq-answer">
+          <p>参赛作品的 all 知识产权归参赛团队所有。主办方仅保留在活动宣传中使用项目展示的权利（如照片、介绍、Demo 视频等）。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>评审标准是什么？</summary>
+        <div class="faq-answer">
+          <p>评审将从以下维度综合评分：创新性（30%）、技术难度（25%）、完成度（20%）、商业潜力（15%）、团队协作（10%）。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>需要自备设备吗？</summary>
+        <div class="faq-answer">
+          <p>是的，请自带笔记本电脑及必要的开发设备。主办方提供 Wi-Fi、电源、餐饮和休息区。</p>
+        </div>
+      </details>
+    </div>
   </div>
 </section>
 
 <!-- ==================== Registration ==================== -->
-<section id="register" class="registration">
+<section class="section section-alt registration" id="register">
   <div class="container">
     <h2 class="section-title reveal">立即报名</h2>
-    <div class="pixel-divider reveal"></div>
+    <div class="section-divider reveal"></div>
     <p class="section-subtitle reveal">用 AI 改变世界，从这次黑客松开始</p>
-    <div class="registration-card reveal">
-      <h3>加入 Chancetop 2026 黑客松</h3>
-      <p>填写报名表，组队参赛。我们将在收到报名后 3 个工作日内通过邮件确认。</p>
-      <button class="reg-cta" id="openModalBtn">
+    <div class="reg-card reveal">
+      <h3>加入 Chance Top 2026 黑客松</h3>
+      <p>填写报名表，组队参赛。报名截止：<strong>2026.06.15 23:59</strong>。我们将在收到报名后通过邮件确认。</p>
+      <button class="btn btn-lg" id="openModalBtn">
         填写报名表
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
-      <p class="reg-note">使用腾讯问卷提交报名，提交后您将收到确认邮件。如有疑问请联系 <a href="mailto:hackathon@chancetop.com" style="color:var(--cyan);text-decoration:none;">hackathon@chancetop.com</a></p>
+      <p class="reg-note">使用腾讯问卷提交报名，提交后您将收到确认邮件。如有疑问请联系 <a href="mailto:hackathon@chancetop.com">hackathon@chancetop.com</a></p>
     </div>
   </div>
 </section>
@@ -643,7 +751,7 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-content">
     <button class="modal-close" id="modalCloseBtn" aria-label="关闭">✕</button>
-    <div class="modal-title">Chancetop 2026 黑客松 · 报名表</div>
+    <div class="modal-title">Chance Top 2026 黑客松 · 报名表</div>
     <div class="modal-iframe-wrap">
       <div class="modal-loading" id="modalLoading">
         <div class="modal-spinner"></div>
@@ -651,7 +759,7 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
       </div>
       <div class="modal-error" id="modalError">
         <p>报名表加载失败</p>
-        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener">
+        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:none;font-weight:500;">
           点击此处在新窗口打开报名表 →
         </a>
       </div>
@@ -669,13 +777,25 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 <!-- ==================== Footer ==================== -->
 <footer>
   <div class="container">
-    <div class="footer-brand">CHANCE<span>TOP</span></div>
+    <div class="footer-brand">
+      <svg width="105" height="27" viewBox="0 0 105 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_footer)">
+          <path d="M25.3469 7.40735L26.8571 8.50101C27.9703 9.30767 28.4374 10.7348 28.0092 12.0379L24.8097 21.8498H14.2147L12.9225 17.894H21.8437H21.9216L25.3469 7.40735ZM19.664 8.18299L16.8849 16.7073H21.0653L24.3348 6.6705L15.9507 0.604999C14.8375 -0.201666 13.3273 -0.201666 12.2141 0.604999L10.7038 1.69865L19.664 8.18299ZM23.8444 24.8127L24.4205 23.0442H13.3506L13.2961 22.8736L10.5715 14.52L7.19295 16.9632L10.4625 27H20.8239C22.2018 27 23.424 26.1158 23.8444 24.8127ZM5.7917 16.5056L5.83062 16.4823L13.0704 11.239L9.69183 8.79575L1.12088 15.0009L4.32039 24.8127C4.74855 26.1158 5.96296 27 7.34086 27H9.20918L7.91692 23.0442L5.7917 16.5056ZM9.69183 7.32203L16.9705 12.5886L18.2628 8.63286L9.69183 2.42775L1.30772 8.50101C0.194504 9.30767 -0.272578 10.7348 0.15558 12.0379L0.731648 13.8064L9.69183 7.32203Z" fill="#E2592A"/>
+          <path d="M74.4218 9.09806V7.18223L74.523 7.17448C74.7877 7.15121 75.0679 7.11243 75.3637 7.06589C75.6595 7.01935 75.932 6.97281 76.1733 6.92627C76.4147 6.87973 76.6171 6.84095 76.7805 6.80217C76.8506 6.78666 76.9051 6.77114 76.944 6.76339L76.6638 5.57666C76.5548 5.59993 76.4147 5.6232 76.2434 5.66198C76.0176 5.70852 75.7685 5.75506 75.5039 5.8016C75.2392 5.84813 74.9667 5.88692 74.7098 5.91794C74.4451 5.94897 74.2116 5.96448 74.017 5.96448H70.7552V7.19775H73.1918V9.10582H70.4983V10.3391H71.5804H72.8103H73.1918V10.4477V19.6157H74.4296V10.3313H77.0997V9.09806H74.4218Z" fill="#181616"/>
+          <path d="M84.2304 5.64648H82.9927V19.5304H84.2304V5.64648Z" fill="#181616"/>
+          <path d="M38.7055 7.57802H37.6857H37.5768V7.46167V5.53809H36.339V7.46943V7.57802H36.23H35.2725C34.4084 7.57802 33.7078 8.27609 33.7078 9.13705V16.4358C33.7078 17.2968 34.4084 17.9949 35.2725 17.9949H36.23H36.339V18.1034V19.5927H37.5768V18.1034V17.9949H37.6857H38.6588C39.0325 17.9949 39.3828 17.8863 39.6475 17.6846C39.8732 17.514 40.0445 17.3045 40.1457 17.0563L40.2158 16.8236C40.2469 16.715 40.2625 16.5832 40.2625 16.4513V9.13705C40.2703 8.27609 39.5696 7.57802 38.7055 7.57802Z" fill="#181616"/>
+          <path d="M57.8715 7.26756L60.4949 7.28307L60.4638 7.41493C60.3859 7.73294 60.2769 8.15179 60.1212 8.64044C59.9656 9.13685 59.7476 9.70306 59.4751 10.3158C59.1949 10.9286 58.8523 11.5956 58.4475 12.2859C58.0583 12.953 57.5912 13.6356 57.0541 14.3181L58.0116 15.086C58.1906 14.8688 58.3619 14.6516 58.5176 14.4267C58.6966 14.1707 58.8679 13.9148 59.047 13.6743L59.2494 13.3873V13.7364V18.0024C59.2494 18.8634 59.95 19.5614 60.8141 19.5614H65.8664C66.3568 19.5614 66.746 19.3753 67.0652 18.9952C67.291 18.7237 67.4155 18.3747 67.4155 18.0024V12.8909C67.4155 12.03 66.7149 11.3319 65.8508 11.3319H60.5572H60.3859L60.456 11.1768C60.853 10.3236 61.1566 9.55569 61.3512 8.8964C61.5458 8.23711 61.686 7.72518 61.756 7.37615L61.7716 7.29083H68.1473V6.0498H57.8715V7.26756Z" fill="#181616"/>
+        </g>
+        <defs><clipPath id="clip0_footer"><rect width="105" height="27" fill="white"/></clipPath></defs>
+      </svg>
+    </div>
     <p>厦门畅拓科技有限公司</p>
-    <p style="font-size:.8rem;color:var(--text-secondary);margin-top:4px;">Xiamen Chancetop Technology Co., Ltd.</p>
+    <p style="font-size:.8rem;color:var(--text-secondary);margin-top:2px;">Xiamen Chancetop Technology Co., Ltd.</p>
     <ul class="footer-links">
-      <li><a href="#hero">首页</a></li>
+      <li><a href="#home">首页</a></li>
       <li><a href="#schedule">赛程</a></li>
       <li><a href="#prizes">奖项</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#register">报名</a></li>
     </ul>
     <p class="copyright">&copy; 2026 Chancetop. All rights reserved.</p>
@@ -687,14 +807,13 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
 (function(){
   'use strict';
 
-  /* --- Mobile nav toggle --- */
-  const toggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
+  /* Mobile nav toggle */
+  var toggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
   if(toggle && navLinks){
     toggle.addEventListener('click', function(){
       navLinks.classList.toggle('open');
     });
-    // Close nav on link click (mobile)
     navLinks.querySelectorAll('a').forEach(function(link){
       link.addEventListener('click', function(){
         navLinks.classList.remove('open');
@@ -702,24 +821,10 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
     });
   }
 
-  /* --- 8-bit twinkling stars for Hero --- */
-  var starsContainer = document.querySelector('.hero-stars');
-  if(starsContainer){
-    for(var i=0; i<12; i++){
-      var star = document.createElement('div');
-      star.className = 'pixel-star';
-      star.style.left = (Math.random() * 90 + 5) + '%';
-      star.style.top = (Math.random() * 80 + 10) + '%';
-      star.style.animationDelay = (Math.random() * 5) + 's';
-      star.style.animationDuration = (2 + Math.random() * 3) + 's';
-      starsContainer.appendChild(star);
-    }
-  }
-
-  /* --- Scroll reveal with IntersectionObserver --- */
-  const revealEls = document.querySelectorAll('.reveal, .timeline-item');
+  /* Scroll reveal */
+  var revealEls = document.querySelectorAll('.reveal');
   if(revealEls.length && 'IntersectionObserver' in window){
-    const observer = new IntersectionObserver(function(entries){
+    var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
           entry.target.classList.add('visible');
@@ -729,11 +834,10 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
     }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
     revealEls.forEach(function(el){ observer.observe(el); });
   } else {
-    // Fallback: show all immediately
     revealEls.forEach(function(el){ el.classList.add('visible'); });
   }
 
-  /* --- Registration modal --- */
+  /* Registration modal */
   var formUrl = '#'; // TODO: replace with actual form URL by AE
   var modalOverlay = document.getElementById('modalOverlay');
   var openBtn = document.getElementById('openModalBtn');
@@ -748,11 +852,9 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
     document.body.style.overflow = 'hidden';
     if(formUrl && formUrl !== '#'){
       formIframe.src = formUrl;
-      // iframe load handler
       formIframe.onload = function(){
         modalLoading.style.display = 'none';
       };
-      // timeout fallback
       setTimeout(function(){
         if(modalLoading.style.display !== 'none'){
           modalLoading.style.display = 'none';
@@ -770,7 +872,6 @@ footer .copyright{font-size:.8rem;color:rgba(255,255,255,.3)}
   function closeModal(){
     modalOverlay.classList.remove('open');
     document.body.style.overflow = '';
-    // Delay iframe unload to avoid flash
     setTimeout(function(){ formIframe.src = 'about:blank'; }, 300);
     modalLoading.style.display = 'flex';
     modalError.classList.remove('show');
